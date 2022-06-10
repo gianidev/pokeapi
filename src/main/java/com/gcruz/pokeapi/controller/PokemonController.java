@@ -14,10 +14,14 @@ import java.util.List;
 @RequestMapping("/pokemon")
 public class PokemonController {
 
-    @Autowired
     PokemonService service;
 
-    @GetMapping
+    @Autowired
+    public PokemonController(PokemonService service) {
+        this.service = service;
+    }
+
+    @GetMapping(value = "/all")
     private ResponseEntity<List<Pokemon>> findAll() throws Exception {
         return new ResponseEntity<List<Pokemon>>(service.findAll(), HttpStatus.OK);
     }
@@ -25,6 +29,11 @@ public class PokemonController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Pokemon> findById(@PathVariable("id") Long id) throws NotFoundException {
         return new ResponseEntity<Pokemon>(service.findById(id), HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<Pokemon> findByName(@RequestParam("name") String name) throws NotFoundException {
+        return new ResponseEntity<Pokemon>(service.findByName(name), HttpStatus.OK);
     }
 
     @PostMapping

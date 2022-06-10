@@ -14,13 +14,16 @@ import java.util.List;
 @RequestMapping("stats")
 public class StatsController {
 
-    @Autowired
     StatsService service;
 
-    @GetMapping
+    @Autowired
+    public StatsController(StatsService service) {
+        this.service = service;
+    }
+
+    @GetMapping(value = "/all")
     public ResponseEntity<List<Stats>> findAll() throws Exception {
         return new ResponseEntity<List<Stats>>(service.findAll(), HttpStatus.OK);
-
     }
 
     @GetMapping("/{id}")

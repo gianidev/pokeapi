@@ -14,10 +14,14 @@ import java.util.List;
 @RequestMapping("generation")
 public class GenerationController {
 
-    @Autowired
     GenerationService service;
 
-    @GetMapping
+    @Autowired
+    public GenerationController(GenerationService service) {
+        this.service = service;
+    }
+
+    @GetMapping(value = "/all")
     private ResponseEntity<List<Generation>> findAll() throws Exception {
         return new ResponseEntity<List<Generation>>(service.findAll(), HttpStatus.OK);
     }
