@@ -3,11 +3,12 @@ package com.gcruz.pokeapi.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "pokemon")
-public class Pokemon {
+public class Pokemon implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,6 +33,20 @@ public class Pokemon {
     private Sprite sprite;
 
     public Pokemon() {
+    }
+
+    public Pokemon(Long id, String name, int height, int weight, Generation generation, Stats stats, Region region, List<Type> type, List<Move> moves, List<Ability> abilities, Sprite sprite) {
+        this.id = id;
+        this.name = name;
+        this.height = height;
+        this.weight = weight;
+        this.generation = generation;
+        this.stats = stats;
+        this.region = region;
+        this.type = type;
+        this.moves = moves;
+        this.abilities = abilities;
+        this.sprite = sprite;
     }
 
     public Long getId() {
