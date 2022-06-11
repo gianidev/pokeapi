@@ -35,12 +35,8 @@ public class PokemonServiceImpl implements PokemonService {
     @Override
     public Pokemon create(Pokemon pokemon) throws Exception {
         try {
-            validatePokemon(pokemon);
-            pokemon.setGeneration(generationService.findById(pokemon.getGeneration().getId()));
-
             Stats stats = statsService.create(pokemon.getStats());
             pokemon.setStats(stats);
-
             logger.info("Saving pokemon in database.");
             return repository.save(pokemon);
         } catch (Exception e) {
@@ -81,7 +77,6 @@ public class PokemonServiceImpl implements PokemonService {
         try {
             logger.info(String.format("Updating Pokemon with id %s .", id));
             pokemon.setId(id);
-            validatePokemon(pokemon);
             repository.save(pokemon);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -96,16 +91,6 @@ public class PokemonServiceImpl implements PokemonService {
             repository.deleteById(id);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
-        }
-    }
-
-    private void validatePokemon(Pokemon pokemon) throws Exception {
-        logger.info("Validating if Pokemon is not null and if it has a Generation.");
-        if (Objects.isNull(pokemon)) {
-            throw new Exception("Required request body is missing");
-        }
-        if (Objects.isNull(pokemon.getGeneration()) || Objects.isNull(pokemon.getGeneration().getId())) {
-            throw new Exception("Unable to create Pokemon, Generation value must not be null");
         }
     }
 }

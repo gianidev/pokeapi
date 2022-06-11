@@ -1,21 +1,26 @@
 package com.gcruz.pokeapi.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity(name = "stats")
 public class Stats {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     private int healthPoints;
+    @NotNull
     private int attack;
+    @NotNull
     private int defense;
+    @NotNull
     private int speedAttack;
+    @NotNull
     private int speedDefence;
+    @NotNull
     private int speed;
+    @NotNull
     private int total;
 
     public Stats() {

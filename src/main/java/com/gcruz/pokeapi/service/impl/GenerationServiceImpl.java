@@ -27,7 +27,6 @@ public class GenerationServiceImpl implements GenerationService {
     @Override
     public Generation create(Generation generation) throws Exception {
         try {
-            validateGeneration(generation);
             logger.info("Saving generation in database.");
             return repository.save(generation);
         } catch (Exception e) {
@@ -75,10 +74,4 @@ public class GenerationServiceImpl implements GenerationService {
         }
     }
 
-    private void validateGeneration(Generation generation) throws Exception {
-        logger.info("Validating if generation object has a Name.");
-        if (Objects.isNull(generation.getName())) {
-            throw new Exception("Unable to create Pokemon, Name value must not be null");
-        }
-    }
 }

@@ -3,6 +3,7 @@ package com.gcruz.pokeapi.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -11,6 +12,7 @@ public class Generation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     private String name;
     @OneToMany
     private List<Ability> abilities;
