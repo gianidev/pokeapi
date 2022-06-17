@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -35,6 +34,7 @@ public class PokemonServiceImpl implements PokemonService {
     @Override
     public Pokemon create(Pokemon pokemon) throws Exception {
         try {
+            verifyValues(pokemon);
             Stats stats = statsService.create(pokemon.getStats());
             pokemon.setStats(stats);
             logger.info("Saving pokemon in database.");
@@ -75,6 +75,7 @@ public class PokemonServiceImpl implements PokemonService {
     @Override
     public void update(long id, Pokemon pokemon) throws Exception {
         try {
+            verifyValues(pokemon);
             logger.info(String.format("Updating Pokemon with id %s .", id));
             pokemon.setId(id);
             repository.save(pokemon);
@@ -91,6 +92,12 @@ public class PokemonServiceImpl implements PokemonService {
             repository.deleteById(id);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
+        }
+    }
+
+    public void verifyValues(Pokemon pokemon) throws Exception {
+        if (pokemon.getStats() == null || pokemon.getGeneration() == null) {
+            throw new Exception("Object contain null values");
         }
     }
 }

@@ -50,7 +50,7 @@ public class GenerationServiceImpl implements GenerationService {
         if (optional.isPresent()) {
             logger.info(String.format("Generation with id %s has been found.", id));
             return optional.get();
-        } else throw new NotFoundException(String.format("Generation with id %s has not found", id));
+        } else throw new NotFoundException(String.format("Generation with id %s was not found", id));
     }
 
     @Override

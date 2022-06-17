@@ -11,6 +11,9 @@ public class Effect {
     private String effect;
     private String shortEffect;
 
+    public Effect() {
+    }
+
     public Effect(long id, String effect, String shortEffect) {
         this.id = id;
         this.effect = effect;
