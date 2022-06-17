@@ -54,11 +54,9 @@ public class EffectServiceImpl implements EffectService {
     }
 
     @Override
-    public void update(long id, Effect effect) throws Exception {
+    public void update(Effect effect) throws Exception {
         try {
-            logger.info(String.format("Updating Effect with id %s .", id));
-
-            effect.setId(id);
+            logger.info(String.format("Updating Effect with id %s .", effect.getId()));
             repository.save(effect);
         } catch (Exception e) {
             throw new Exception(e.getMessage());

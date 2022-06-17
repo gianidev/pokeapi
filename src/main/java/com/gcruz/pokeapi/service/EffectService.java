@@ -13,7 +13,7 @@ public interface EffectService {
 
     Effect create(Effect effect) throws Exception;
 
-    void update(long id, Effect effect) throws Exception;
+    void update(Effect effect) throws Exception;
 
     void delete(long id) throws Exception;
 }

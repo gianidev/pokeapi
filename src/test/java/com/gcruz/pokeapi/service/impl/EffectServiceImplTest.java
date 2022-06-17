@@ -58,7 +58,7 @@ class EffectServiceImplTest {
         //given
         Effect effect = mockEffect();
         //when
-        service.update(1L, effect);
+        service.update(effect);
         //then
         verify(repository).save(effect);
     }
