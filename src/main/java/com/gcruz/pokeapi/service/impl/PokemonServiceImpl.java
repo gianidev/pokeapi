@@ -35,8 +35,6 @@ public class PokemonServiceImpl implements PokemonService {
     public Pokemon create(Pokemon pokemon) throws Exception {
         try {
             verifyValues(pokemon);
-            Stats stats = statsService.create(pokemon.getStats());
-            pokemon.setStats(stats);
             logger.info("Saving pokemon in database.");
             return repository.save(pokemon);
         } catch (Exception e) {

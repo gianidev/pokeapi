@@ -17,7 +17,7 @@ public class Stats {
     @NotNull
     private int speedAttack;
     @NotNull
-    private int speedDefence;
+    private int speedDefense;
     @NotNull
     private int speed;
     @NotNull
@@ -66,12 +66,12 @@ public class Stats {
         this.speedAttack = speedAttack;
     }
 
-    public int getSpeedDefence() {
-        return speedDefence;
+    public int getSpeedDefense() {
+        return speedDefense;
     }
 
-    public void setSpeedDefence(int speedDefence) {
-        this.speedDefence = speedDefence;
+    public void setSpeedDefense(int speedDefense) {
+        this.speedDefense = speedDefense;
     }
 
     public int getSpeed() {

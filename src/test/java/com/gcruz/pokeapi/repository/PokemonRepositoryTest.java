@@ -62,7 +62,7 @@ class PokemonRepositoryTest {
         stats.setHealthPoints(10);
         stats.setSpeed(15);
         stats.setSpeedAttack(23);
-        stats.setSpeedDefence(11);
+        stats.setSpeedDefense(11);
         stats.setTotal(62);
         statsRepository.save(stats);
 
