@@ -60,7 +60,7 @@ class GenerationServiceImplTest {
         //given
         Generation generation = mockGeneration();
         //when
-        service.update(1L, generation);
+        service.update(generation);
         //then
         verify(repository).save(generation);
     }

@@ -41,9 +41,9 @@ public class PokemonController {
         return new ResponseEntity<Pokemon>(service.create(pokemon), HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Pokemon pokemon) throws Exception {
-        service.update(id, pokemon);
+    @PutMapping
+    public ResponseEntity update(@RequestBody Pokemon pokemon) throws Exception {
+        service.update(pokemon);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

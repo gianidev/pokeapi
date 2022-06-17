@@ -12,7 +12,7 @@ public interface GenerationService {
 
     Generation findById(long id) throws NotFoundException;
 
-    void update(long id, Generation generation) throws Exception;
+    void update(Generation generation) throws Exception;
 
     void deleteById(long id) throws Exception;
 }

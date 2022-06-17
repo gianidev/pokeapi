@@ -54,11 +54,9 @@ public class StatsServiceImpl implements StatsService {
 
 
     @Override
-    public void update(long id, Stats stats) throws Exception {
+    public void update(Stats stats) throws Exception {
         try {
-            logger.info(String.format("Updating Stats with id %s .", id));
-
-            stats.setId(id);
+            logger.info(String.format("Updating Stats with id %s .", stats.getId()));
             repository.save(stats);
         } catch (Exception e) {
             throw new Exception(e.getMessage());

@@ -76,7 +76,7 @@ class GenerationControllerTest {
     @Test
     void updateGenerationSuccess() throws Exception {
         //when
-        ResponseEntity<Generation> response = controller.update(1L, mockGeneration());
+        ResponseEntity<Generation> response = controller.update(mockGeneration());
         //then
         verify(repository).save(any());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

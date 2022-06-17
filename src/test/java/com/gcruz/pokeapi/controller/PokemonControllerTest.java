@@ -85,7 +85,7 @@ class PokemonControllerTest {
     @Test
     void updatePokemonSuccess() throws Exception {
         //when
-        ResponseEntity<Pokemon> response = controller.update(1L, mockPokemon());
+        ResponseEntity<Pokemon> response = controller.update(mockPokemon());
         //then
         verify(repository).save(any());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

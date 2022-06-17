@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -54,10 +53,9 @@ public class GenerationServiceImpl implements GenerationService {
     }
 
     @Override
-    public void update(long id, Generation generation) throws Exception {
+    public void update(Generation generation) throws Exception {
         try {
-            logger.info(String.format("Updating generation with id %s .", id));
-            generation.setId(id);
+            logger.info(String.format("Updating generation with id %s .", generation.getId()));
             repository.save(generation);
         } catch (Exception e) {
             throw new Exception(e.getMessage());

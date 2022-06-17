@@ -14,7 +14,7 @@ public interface PokemonService {
 
     Pokemon findByName(String name) throws NotFoundException;
 
-    void update(long id, Pokemon pokemon) throws Exception;
+    void update(Pokemon pokemon) throws Exception;
 
     void deleteById(long id) throws Exception;
 

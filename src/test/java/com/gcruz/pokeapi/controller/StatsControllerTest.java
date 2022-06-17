@@ -76,7 +76,7 @@ class StatsControllerTest {
     @Test
     void updateStatsSuccess() throws Exception {
         //when
-        ResponseEntity<Stats> response = controller.update(1L, mockStats());
+        ResponseEntity<Stats> response = controller.update(mockStats());
         //then
         verify(repository).save(any());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

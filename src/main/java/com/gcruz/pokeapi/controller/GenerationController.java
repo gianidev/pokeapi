@@ -36,9 +36,9 @@ public class GenerationController {
         return new ResponseEntity<Generation>(service.create(generation), HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity update(@PathVariable("id") long id, @RequestBody Generation generation) throws Exception {
-        service.update(id, generation);
+    @PutMapping
+    public ResponseEntity update(@RequestBody Generation generation) throws Exception {
+        service.update(generation);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

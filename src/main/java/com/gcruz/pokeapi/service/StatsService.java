@@ -12,7 +12,7 @@ public interface StatsService {
 
     Stats findById(long id) throws NotFoundException;
 
-    void update(long id, Stats stats) throws Exception;
+    void update(Stats stats) throws Exception;
 
     void deleteById(long id) throws Exception;
 }

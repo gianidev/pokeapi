@@ -60,7 +60,7 @@ class StatsServiceImplTest {
         //given
         Stats stats = mockStats();
         //when
-        service.update(1L, stats);
+        service.update(stats);
         //then
         verify(repository).save(stats);
     }

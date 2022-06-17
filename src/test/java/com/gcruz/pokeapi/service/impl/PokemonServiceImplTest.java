@@ -110,7 +110,7 @@ class PokemonServiceImplTest {
         //given
         Pokemon pokemon = mockPokemon();
         //when
-        pokemonService.update(1L, pokemon);
+        pokemonService.update(pokemon);
         //then
         verify(repository).save(pokemon);
     }

@@ -36,9 +36,9 @@ public class StatsController {
         return new ResponseEntity<Stats>(service.create(stats), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable("id") long id, @RequestBody Stats stats) throws Exception {
-        service.update(id, stats);
+    @PutMapping
+    public ResponseEntity update(@RequestBody Stats stats) throws Exception {
+        service.update(stats);
         return new ResponseEntity<>(HttpStatus.OK);
 
     }

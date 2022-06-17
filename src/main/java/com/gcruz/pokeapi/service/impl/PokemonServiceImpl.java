@@ -73,11 +73,10 @@ public class PokemonServiceImpl implements PokemonService {
     }
 
     @Override
-    public void update(long id, Pokemon pokemon) throws Exception {
+    public void update(Pokemon pokemon) throws Exception {
         try {
             verifyValues(pokemon);
-            logger.info(String.format("Updating Pokemon with id %s .", id));
-            pokemon.setId(id);
+            logger.info(String.format("Updating Pokemon with id %s .", pokemon.getId()));
             repository.save(pokemon);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
