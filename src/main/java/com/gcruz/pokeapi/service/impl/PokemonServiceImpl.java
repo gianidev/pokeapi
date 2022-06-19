@@ -1,12 +1,17 @@
 package com.gcruz.pokeapi.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gcruz.pokeapi.entity.Generation;
 import com.gcruz.pokeapi.entity.Pokemon;
-import com.gcruz.pokeapi.entity.Stats;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.PokemonRepository;
 import com.gcruz.pokeapi.service.GenerationService;
 import com.gcruz.pokeapi.service.PokemonService;
 import com.gcruz.pokeapi.service.StatsService;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,6 +87,22 @@ public class PokemonServiceImpl implements PokemonService {
     }
 
     @Override
+    public Pokemon partialUpdate(long id, JsonPatch patch) throws Exception {
+        try {
+            logger.info(String.format("Patching Pokemon with Id %s .", id));
+            Pokemon pokemon = repository.findById(id).orElseThrow(Exception::new);
+            Pokemon pokemonPatched = applyPatchToPokemon(patch, pokemon);
+
+            Generation generation = pokemon.getGeneration();
+            pokemonPatched.setGeneration(generation);
+
+            return repository.save(pokemonPatched);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
     public void deleteById(long id) throws Exception {
         try {
             logger.info(String.format("Deleting Pokemon with id %s.", id));
@@ -96,5 +117,12 @@ public class PokemonServiceImpl implements PokemonService {
         if (pokemon.getStats() == null || pokemon.getGeneration() == null) {
             throw new Exception("Object contain null values");
         }
+    }
+
+    private Pokemon applyPatchToPokemon(
+            JsonPatch patch, Pokemon targetPokemon) throws JsonPatchException, JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode patched = patch.apply(objectMapper.convertValue(targetPokemon, JsonNode.class));
+        return objectMapper.treeToValue(patched, Pokemon.class);
     }
 }

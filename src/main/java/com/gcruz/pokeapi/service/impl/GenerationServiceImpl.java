@@ -1,9 +1,14 @@
 package com.gcruz.pokeapi.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gcruz.pokeapi.entity.Generation;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.GenerationRepository;
 import com.gcruz.pokeapi.service.GenerationService;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +68,18 @@ public class GenerationServiceImpl implements GenerationService {
     }
 
     @Override
+    public Generation partialUpdate(long id, JsonPatch patch) throws Exception {
+        try {
+            logger.info(String.format("Patching Generation with Id %s .", id));
+            Generation generation = repository.findById(id).orElseThrow(Exception::new);
+            Generation generationPatched = applyPatchToGeneration(patch, generation);
+            return repository.save(generationPatched);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
     public void deleteById(long id) throws Exception {
         try {
             logger.info(String.format("Deleting generation with id %s.", id));
@@ -72,4 +89,11 @@ public class GenerationServiceImpl implements GenerationService {
         }
     }
 
+    private Generation applyPatchToGeneration(
+            JsonPatch patch, Generation targetGeneration) throws JsonPatchException, JsonProcessingException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode patched = patch.apply(objectMapper.convertValue(targetGeneration, JsonNode.class));
+        return objectMapper.treeToValue(patched, Generation.class);
+    }
 }

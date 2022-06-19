@@ -2,6 +2,7 @@ package com.gcruz.pokeapi.service;
 
 import com.gcruz.pokeapi.entity.Generation;
 import com.gcruz.pokeapi.exception.NotFoundException;
+import com.github.fge.jsonpatch.JsonPatch;
 
 import java.util.List;
 
@@ -13,6 +14,8 @@ public interface GenerationService {
     Generation findById(long id) throws NotFoundException;
 
     void update(Generation generation) throws Exception;
+
+    Generation partialUpdate(long id, JsonPatch patch) throws Exception;
 
     void deleteById(long id) throws Exception;
 }

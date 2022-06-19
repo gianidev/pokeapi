@@ -3,6 +3,7 @@ package com.gcruz.pokeapi.controller;
 import com.gcruz.pokeapi.entity.Generation;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.service.GenerationService;
+import com.github.fge.jsonpatch.JsonPatch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,11 @@ public class GenerationController {
     public ResponseEntity update(@RequestBody Generation generation) throws Exception {
         service.update(generation);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Generation> partialUpdate(@PathVariable("id") long id, @RequestBody JsonPatch patch) throws Exception {
+        return new ResponseEntity<Generation>(service.partialUpdate(id, patch), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")

@@ -3,6 +3,7 @@ package com.gcruz.pokeapi.controller;
 import com.gcruz.pokeapi.entity.Effect;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.service.EffectService;
+import com.github.fge.jsonpatch.JsonPatch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +43,12 @@ public class EffectController {
         service.update(effect);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Effect> partialUpdate(@PathVariable("id") long id, @RequestBody JsonPatch patch) throws Exception {
+        return new ResponseEntity<Effect>(service.partialUpdate(id, patch), HttpStatus.OK);
+    }
+
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity delete(@PathVariable("id") long id) throws Exception {

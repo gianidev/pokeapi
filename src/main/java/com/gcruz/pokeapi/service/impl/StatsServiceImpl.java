@@ -1,9 +1,14 @@
 package com.gcruz.pokeapi.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gcruz.pokeapi.entity.Stats;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.StatsRepository;
 import com.gcruz.pokeapi.service.StatsService;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +69,18 @@ public class StatsServiceImpl implements StatsService {
     }
 
     @Override
+    public Stats partialUpdate(long id, JsonPatch patch) throws Exception {
+        try {
+            logger.info(String.format("Patching Stats with Id %s .", id));
+            Stats stats = repository.findById(id).orElseThrow(Exception::new);
+            Stats statsPatched = applyPatchToStats(patch, stats);
+            return repository.save(statsPatched);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
     public void deleteById(long id) throws Exception {
         try {
             logger.info(String.format("Deleting Stats with id %s.", id));
@@ -71,5 +88,12 @@ public class StatsServiceImpl implements StatsService {
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
+    }
+
+    private Stats applyPatchToStats(
+            JsonPatch patch, Stats targetStats) throws JsonPatchException, JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode patched = patch.apply(objectMapper.convertValue(targetStats, JsonNode.class));
+        return objectMapper.treeToValue(patched, Stats.class);
     }
 }

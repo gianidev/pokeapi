@@ -2,6 +2,7 @@ package com.gcruz.pokeapi.service;
 
 import com.gcruz.pokeapi.entity.Effect;
 import com.gcruz.pokeapi.exception.NotFoundException;
+import com.github.fge.jsonpatch.JsonPatch;
 
 import java.util.List;
 
@@ -14,6 +15,8 @@ public interface EffectService {
     Effect create(Effect effect) throws Exception;
 
     void update(Effect effect) throws Exception;
+
+    Effect partialUpdate(long id, JsonPatch patch) throws Exception;
 
     void delete(long id) throws Exception;
 }

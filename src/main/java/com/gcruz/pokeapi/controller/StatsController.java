@@ -3,6 +3,7 @@ package com.gcruz.pokeapi.controller;
 import com.gcruz.pokeapi.entity.Stats;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.service.StatsService;
+import com.github.fge.jsonpatch.JsonPatch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +42,11 @@ public class StatsController {
         service.update(stats);
         return new ResponseEntity<>(HttpStatus.OK);
 
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Stats> partialUpdate(@PathVariable("id") long id, @RequestBody JsonPatch patch) throws Exception {
+        return new ResponseEntity<Stats>(service.partialUpdate(id, patch), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
