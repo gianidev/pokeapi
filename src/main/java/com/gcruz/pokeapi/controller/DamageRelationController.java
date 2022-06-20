@@ -39,7 +39,7 @@ public class DamageRelationController {
 
     @PutMapping
     public ResponseEntity<DamageRelation> update(@RequestBody DamageRelation damageRelation) throws Exception {
-        return new ResponseEntity<DamageRelation>(service.update(damageRelation), HttpStatus.CREATED);
+        return new ResponseEntity<DamageRelation>(service.update(damageRelation), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
