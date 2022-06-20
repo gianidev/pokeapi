@@ -10,7 +10,7 @@ public class Type {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    @ManyToOne
+    @OneToOne
     private DamageRelation damageRelation;
     @OneToOne
     private Generation generation;
