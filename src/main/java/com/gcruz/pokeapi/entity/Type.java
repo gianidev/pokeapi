@@ -14,19 +14,16 @@ public class Type {
     private DamageRelation damageRelation;
     @ManyToMany
     private List<Pokemon> pokemonList;
-    @OneToOne
-    private List<Move> moves;
 
     public Type() {
     }
 
     public Type(long id, String name, DamageRelation damageRelation, Generation generation,
-                List<Pokemon> pokemonList, List<Move> moves) {
+                List<Pokemon> pokemonList) {
         this.id = id;
         this.name = name;
         this.damageRelation = damageRelation;
         this.pokemonList = pokemonList;
-        this.moves = moves;
     }
 
     public long getId() {
@@ -61,11 +58,4 @@ public class Type {
         this.pokemonList = pokemonList;
     }
 
-    public List<Move> getMoves() {
-        return moves;
-    }
-
-    public void setMoves(List<Move> moves) {
-        this.moves = moves;
-    }
 }

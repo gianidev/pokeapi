@@ -20,8 +20,6 @@ public class Generation {
     @OneToOne
     @JoinColumn(name = "region_id", referencedColumnName = "id")
     private Region mainRegion;
-    @OneToMany
-    private List<Move> moves;
     @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "generation")
     private List<Pokemon> pokemonList;
@@ -63,13 +61,6 @@ public class Generation {
         this.mainRegion = mainRegion;
     }
 
-    public List<Move> getMoves() {
-        return moves;
-    }
-
-    public void setMoves(List<Move> moves) {
-        this.moves = moves;
-    }
 
     public List<Pokemon> getPokemonList() {
         return pokemonList;
