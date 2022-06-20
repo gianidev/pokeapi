@@ -14,13 +14,13 @@ public class Move {
     private int effectChance;
     private int pp;
     private int power;
-    @OneToMany
+    @OneToOne
     private List<Effect> effects;
     @ManyToMany
     private List<Pokemon> learnedBy;
     @ManyToOne
     private Generation generation;
-    @ManyToOne
+    @OneToOne
     private Type type;
 
     public Move() {
