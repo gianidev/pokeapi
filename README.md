@@ -1,6 +1,6 @@
 # PokeAPI
 
-This API has been created to register and fetch Pokemon data, like a Pokedéx. <img src="https://img.pokemondb.net/sprites/home/normal/pikachu-original-cap.png" align="right" />
+This API has been created to create and fetch Pokemon data, like a Pokedéx. <img src="https://img.pokemondb.net/sprites/home/normal/pikachu-original-cap.png" align="right" />
 ## Requirements
 
 For building and running the application you need:
