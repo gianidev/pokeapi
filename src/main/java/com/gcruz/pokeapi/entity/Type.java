@@ -19,6 +19,9 @@ public class Type {
     @ManyToMany
     private List<Move> moves;
 
+    public Type() {
+    }
+
     public Type(long id, String name, DamageRelation damageRelation, Generation generation,
                 List<Pokemon> pokemonList, List<Move> moves) {
         this.id = id;
