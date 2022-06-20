@@ -10,8 +10,6 @@ public class Ability {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    @ManyToOne
-    private Generation generation;
     @ManyToMany
     private List<Pokemon> pokemonList;
     @ManyToOne
@@ -31,14 +29,6 @@ public class Ability {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Generation getGeneration() {
-        return generation;
-    }
-
-    public void setGeneration(Generation generation) {
-        this.generation = generation;
     }
 
     public List<Pokemon> getPokemonList() {
