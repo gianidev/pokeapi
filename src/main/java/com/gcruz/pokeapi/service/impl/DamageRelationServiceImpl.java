@@ -23,10 +23,10 @@ public class DamageRelationServiceImpl implements DamageRelationService {
     }
 
     @Override
-    public DamageRelation create(DamageRelation ramageRelation) throws Exception {
+    public DamageRelation create(DamageRelation damageRelation) throws Exception {
         try {
             logger.info("Saving DamageRelation in database.");
-            return repository.save(ramageRelation);
+            return repository.save(damageRelation);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -38,7 +38,7 @@ public class DamageRelationServiceImpl implements DamageRelationService {
             logger.info("Fetching all DamageRelation.");
             return (List<DamageRelation>) repository.findAll();
         } catch (Exception e) {
-            throw new Exception("Error while fetching all ramageRelation.");
+            throw new Exception("Error while fetching all damageRelation.");
         }
     }
 
@@ -53,10 +53,10 @@ public class DamageRelationServiceImpl implements DamageRelationService {
 
 
     @Override
-    public DamageRelation update(DamageRelation ramageRelation) throws Exception {
+    public DamageRelation update(DamageRelation damageRelation) throws Exception {
         try {
-            logger.info(String.format("Updating DamageRelation with id %s .", ramageRelation.getId()));
-            return repository.save(ramageRelation);
+            logger.info(String.format("Updating DamageRelation with id %s .", damageRelation.getId()));
+            return repository.save(damageRelation);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
