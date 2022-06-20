@@ -7,15 +7,16 @@ import javax.persistence.*;
 public class Region {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
     private String name;
-    @OneToOne
-    private Generation mainGeneration;
 
-    public Region(long id, String name, Generation mainGeneration) {
+    public Region() {
+    }
+
+    public Region(long id, String name) {
         this.id = id;
         this.name = name;
-        this.mainGeneration = mainGeneration;
     }
 
     public long getId() {
@@ -34,11 +35,4 @@ public class Region {
         this.name = name;
     }
 
-    public Generation getMainGeneration() {
-        return mainGeneration;
-    }
-
-    public void setMainGeneration(Generation mainGeneration) {
-        this.mainGeneration = mainGeneration;
-    }
 }

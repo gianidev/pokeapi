@@ -11,12 +11,14 @@ import java.util.List;
 public class Generation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
     @NotNull
     private String name;
     @OneToMany
     private List<Ability> abilities;
     @OneToOne
+    @JoinColumn(name = "region_id", referencedColumnName = "id")
     private Region mainRegion;
     @OneToMany
     private List<Move> moves;
