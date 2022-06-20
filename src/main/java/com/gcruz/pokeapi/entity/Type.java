@@ -18,7 +18,7 @@ public class Type {
     public Type() {
     }
 
-    public Type(long id, String name, DamageRelation damageRelation, Generation generation,
+    public Type(long id, String name, DamageRelation damageRelation,
                 List<Pokemon> pokemonList) {
         this.id = id;
         this.name = name;
