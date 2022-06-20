@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  app:
+    image: 'pokeapi:latest'
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://pokedb:5432/pokedb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8081:8080"
+
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: pokedb
+    environment:
+      - POSTGRES_DB=pokedb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+    ports:
+      - '6543:5432'
