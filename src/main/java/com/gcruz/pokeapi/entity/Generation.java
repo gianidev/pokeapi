@@ -15,8 +15,6 @@ public class Generation {
     private Long id;
     @NotNull
     private String name;
-    @OneToMany
-    private List<Ability> abilities;
     @OneToOne
     @JoinColumn(name = "region_id", referencedColumnName = "id")
     private Region mainRegion;
@@ -45,14 +43,6 @@ public class Generation {
         this.name = name;
     }
 
-    public List<Ability> getAbilities() {
-        return abilities;
-    }
-
-    public void setAbilities(List<Ability> abilities) {
-        this.abilities = abilities;
-    }
-
     public Region getMainRegion() {
         return mainRegion;
     }
@@ -60,7 +50,6 @@ public class Generation {
     public void setMainRegion(Region mainRegion) {
         this.mainRegion = mainRegion;
     }
-
 
     public List<Pokemon> getPokemonList() {
         return pokemonList;
