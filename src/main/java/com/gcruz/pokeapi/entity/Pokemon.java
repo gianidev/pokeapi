@@ -28,8 +28,6 @@ public class Pokemon implements Serializable {
     private Region region;
     @ManyToMany
     private List<Type> type;
-    @ManyToMany
-    private List<Ability> abilities;
     @OneToOne
     private Sprite sprite;
 
@@ -37,7 +35,7 @@ public class Pokemon implements Serializable {
     }
 
     public Pokemon(Long id, String name, int height, int weight, Generation generation, Stats stats, Region region,
-                   List<Type> type, List<Ability> abilities, Sprite sprite) {
+                   List<Type> type, Sprite sprite) {
         this.id = id;
         this.name = name;
         this.height = height;
@@ -46,7 +44,6 @@ public class Pokemon implements Serializable {
         this.stats = stats;
         this.region = region;
         this.type = type;
-        this.abilities = abilities;
         this.sprite = sprite;
     }
 
@@ -112,14 +109,6 @@ public class Pokemon implements Serializable {
 
     public void setType(List<Type> type) {
         this.type = type;
-    }
-
-    public List<Ability> getAbilities() {
-        return abilities;
-    }
-
-    public void setAbilities(List<Ability> abilities) {
-        this.abilities = abilities;
     }
 
     public Sprite getSprite() {
