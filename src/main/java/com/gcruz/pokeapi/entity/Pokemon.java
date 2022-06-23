@@ -33,14 +33,14 @@ public class Pokemon implements Serializable {
     private List<Type> type;
     @JsonManagedReference
     @OneToOne
-    @JoinColumn(name = "sprite_id")
-    private Sprite sprite;
+    @JoinColumn(name = "artwork_id")
+    private Artwork artwork;
 
     public Pokemon() {
     }
 
     public Pokemon(Long id, String name, int height, int weight, Generation generation, Stats stats, Region region,
-                   List<Type> type, Sprite sprite) {
+                   List<Type> type, Artwork artwork) {
         this.id = id;
         this.name = name;
         this.height = height;
@@ -49,7 +49,7 @@ public class Pokemon implements Serializable {
         this.stats = stats;
         this.region = region;
         this.type = type;
-        this.sprite = sprite;
+        this.artwork = artwork;
     }
 
     public Long getId() {
@@ -116,11 +116,11 @@ public class Pokemon implements Serializable {
         this.type = type;
     }
 
-    public Sprite getSprite() {
-        return sprite;
+    public Artwork getArtwork() {
+        return artwork;
     }
 
-    public void setSprite(Sprite sprite) {
-        this.sprite = sprite;
+    public void setArtwork(Artwork artWork) {
+        this.artwork = artWork;
     }
 }

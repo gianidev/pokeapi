@@ -1,10 +1,10 @@
 package com.gcruz.pokeapi.controller;
 
-import com.gcruz.pokeapi.entity.Sprite;
+import com.gcruz.pokeapi.entity.Artwork;
 import com.gcruz.pokeapi.exception.NotFoundException;
-import com.gcruz.pokeapi.repository.SpriteRepository;
-import com.gcruz.pokeapi.service.SpriteService;
-import com.gcruz.pokeapi.service.impl.SpriteServiceImpl;
+import com.gcruz.pokeapi.repository.ArtworkRepository;
+import com.gcruz.pokeapi.service.ArtworkService;
+import com.gcruz.pokeapi.service.impl.ArtworkServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,37 +21,37 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class SpriteControllerTest {
+class ArtworkControllerTest {
 
     @Mock
-    private SpriteService service;
+    private ArtworkService service;
     @Mock
-    private SpriteRepository repository;
-    private SpriteController controller;
+    private ArtworkRepository repository;
+    private ArtworkController controller;
 
     @BeforeEach
     void setUp() {
-        service = new SpriteServiceImpl(repository);
-        controller = new SpriteController(service);
+        service = new ArtworkServiceImpl(repository);
+        controller = new ArtworkController(service);
     }
 
     @Test
-    void searchSpriteByIdSuccess() throws NotFoundException {
+    void searchArtworkByIdSuccess() throws NotFoundException {
         //when
-        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockSpriteWithId(1L)));
-        ResponseEntity<Sprite> response = controller.findById(1L);
+        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockArtworkWithId(1L)));
+        ResponseEntity<Artwork> response = controller.findById(1L);
 
         //then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
-        Sprite sprite = response.getBody();
-        assertThat(sprite.getId()).isEqualTo(1L);
+        Artwork artWork = response.getBody();
+        assertThat(artWork.getId()).isEqualTo(1L);
     }
 
     @Test
-    void searchSpriteByIdFails() throws NotFoundException {
+    void searchArtworkByIdFails() throws NotFoundException {
         //given
-        String expectedMessage = "Sprite with Id 1 was not found";
+        String expectedMessage = "Artwork with Id 1 was not found";
 
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(null));
@@ -65,24 +65,24 @@ class SpriteControllerTest {
     }
 
     @Test
-    void createSpriteSuccess() throws Exception {
+    void createArtworkSuccess() throws Exception {
         //when
-        when(repository.save(any())).thenReturn(mockSpriteWithId(1L));
-        ResponseEntity<Sprite> response = controller.create(mockSprite());
+        when(repository.save(any())).thenReturn(mockArtworkWithId(1L));
+        ResponseEntity<Artwork> response = controller.create(mockArtwork());
 
         //then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
-        Sprite sprite = response.getBody();
-        assertThat(sprite.getId()).isEqualTo(1L);
+        Artwork artWork = response.getBody();
+        assertThat(artWork.getId()).isEqualTo(1L);
     }
 
 
     @Test
-    void updateSpriteSuccess() throws Exception {
+    void updateArtworkSuccess() throws Exception {
         //when
-        when(repository.save(any())).thenReturn(mockSpriteWithId(1L));
-        ResponseEntity<Sprite> response = controller.update(mockSpriteWithId(1L));
+        when(repository.save(any())).thenReturn(mockArtworkWithId(1L));
+        ResponseEntity<Artwork> response = controller.update(mockArtworkWithId(1L));
 
         //then
         verify(repository).save(any());
@@ -95,27 +95,25 @@ class SpriteControllerTest {
 
 
     @Test
-    void deleteSpriteSuccess() throws Exception {//when
+    void deleteArtworkSuccess() throws Exception {//when
         //when
-        ResponseEntity<Sprite> response = controller.delete(1L);
+        ResponseEntity<Artwork> response = controller.delete(1L);
         //then
         verify(repository).deleteById(1L);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
 
-    Sprite mockSprite() {
-        Sprite sprite = new Sprite();
-        sprite.setArtWork("dummy.url/pikachu-default");
-        sprite.setFrontFemale("dummy.url/pikachu-female");
-        return sprite;
+    Artwork mockArtwork() {
+        Artwork artWork = new Artwork();
+        artWork.setArtWork("dummy.url/pikachu-default");
+        return artWork;
     }
 
-    Sprite mockSpriteWithId(long id) {
-        Sprite sprite = new Sprite();
-        sprite.setId(id);
-        sprite.setArtWork("dummy.url/pikachu-default");
-        sprite.setFrontFemale("dummy.url/pikachu-female");
-        return sprite;
+    Artwork mockArtworkWithId(long id) {
+        Artwork artWork = new Artwork();
+        artWork.setId(id);
+        artWork.setArtWork("dummy.url/pikachu-default");
+        return artWork;
     }
 }

@@ -5,16 +5,15 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "sprites")
-public class Sprite {
+@Table(name = "artworks")
+public class Artwork {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sprite_id")
+    @Column(name = "artwork_id")
     private long id;
     private String artWork;
-    private String frontFemale;
     @JsonBackReference
-    @OneToOne(mappedBy = "sprite")
+    @OneToOne(mappedBy = "artwork")
     private Pokemon pokemon;
 
     public long getId() {
@@ -31,14 +30,6 @@ public class Sprite {
 
     public void setArtWork(String artWork) {
         this.artWork = artWork;
-    }
-
-    public String getFrontFemale() {
-        return frontFemale;
-    }
-
-    public void setFrontFemale(String frontFemale) {
-        this.frontFemale = frontFemale;
     }
 
     public Pokemon getPokemon() {

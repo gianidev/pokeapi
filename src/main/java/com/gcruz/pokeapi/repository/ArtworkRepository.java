@@ -1,9 +1,9 @@
 package com.gcruz.pokeapi.repository;
 
-import com.gcruz.pokeapi.entity.Sprite;
+import com.gcruz.pokeapi.entity.Artwork;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SpriteRepository extends JpaRepository<Sprite, Long> {
+public interface ArtworkRepository extends JpaRepository<Artwork, Long> {
 }

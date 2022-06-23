@@ -1,18 +1,18 @@
 package com.gcruz.pokeapi.service;
 
-import com.gcruz.pokeapi.entity.Sprite;
+import com.gcruz.pokeapi.entity.Artwork;
 import com.gcruz.pokeapi.exception.NotFoundException;
 
 import java.util.List;
 
-public interface SpriteService {
-    Sprite create(Sprite sprite) throws Exception;
+public interface ArtworkService {
+    Artwork create(Artwork artWork) throws Exception;
 
-    List<Sprite> findAll() throws Exception;
+    List<Artwork> findAll() throws Exception;
 
-    Sprite findById(long id) throws NotFoundException;
+    Artwork findById(long id) throws NotFoundException;
 
-    Sprite update(Sprite sprite) throws Exception;
+    Artwork update(Artwork artWork) throws Exception;
 
     void delete(long id) throws Exception;
 }

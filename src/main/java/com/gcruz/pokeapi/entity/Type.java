@@ -18,7 +18,7 @@ public class Type {
     private DamageRelation damageRelation;
     @ManyToMany
     @JoinTable(
-            name = "pokemon_type",
+            name = "pokemons_type",
             joinColumns = @JoinColumn(name = "pokemon_id"),
             inverseJoinColumns = @JoinColumn(name = "type_id"))
     private List<Pokemon> pokemonList;

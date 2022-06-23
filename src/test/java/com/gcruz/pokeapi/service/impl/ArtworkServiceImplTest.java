@@ -1,8 +1,8 @@
 package com.gcruz.pokeapi.service.impl;
 
-import com.gcruz.pokeapi.entity.Sprite;
-import com.gcruz.pokeapi.repository.SpriteRepository;
-import com.gcruz.pokeapi.service.SpriteService;
+import com.gcruz.pokeapi.entity.Artwork;
+import com.gcruz.pokeapi.repository.ArtworkRepository;
+import com.gcruz.pokeapi.service.ArtworkService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,47 +18,47 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class SpriteServiceImplTest {
+class ArtworkServiceImplTest {
 
     @Mock
-    private SpriteRepository repository;
-    private SpriteService service;
+    private ArtworkRepository repository;
+    private ArtworkService service;
 
     @BeforeEach
     void setUp() {
-        service = new SpriteServiceImpl(repository);
+        service = new ArtworkServiceImpl(repository);
     }
 
     @Test
-    void createSpriteSuccess() throws Exception {
+    void createArtworkSuccess() throws Exception {
         //given
-        Sprite sprite = mockSprite();
+        Artwork artWork = mockArtwork();
         //when
-        service.create(sprite);
+        service.create(artWork);
         //then
-        verify(repository).save(sprite);
+        verify(repository).save(artWork);
     }
 
     @Test
-    void searchSpriteSuccess() throws Exception {
+    void searchArtworkSuccess() throws Exception {
         //when
-        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockSpriteWithId(1L)));
-        Sprite sprite = service.findById(1L);
+        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockArtworkWithId(1L)));
+        Artwork artWork = service.findById(1L);
         //then
         verify(repository).findById(1L);
-        assertThat(sprite.getId()).isNotNull();
+        assertThat(artWork.getId()).isNotNull();
     }
 
     @Test
-    void searchAllSpritesSuccess() throws Exception {
+    void searchAllArtworksSuccess() throws Exception {
         //given
-        List<Sprite> spritesList = new ArrayList<Sprite>();
-        spritesList.add(mockSpriteWithId(1L));
-        spritesList.add(mockSpriteWithId(2L));
+        List<Artwork> spritesList = new ArrayList<Artwork>();
+        spritesList.add(mockArtworkWithId(1L));
+        spritesList.add(mockArtworkWithId(2L));
         //when
         when(repository.findAll()).thenReturn(spritesList);
         //when
-        List<Sprite> results = service.findAll();
+        List<Artwork> results = service.findAll();
         //then
         verify(repository).findAll();
         assertThat(results.size()).isEqualTo(spritesList.size());
@@ -66,35 +66,33 @@ class SpriteServiceImplTest {
 
 
     @Test
-    void updateSpriteSuccess() throws Exception {
+    void updateArtworkSuccess() throws Exception {
         //given
-        Sprite newSprite = mockSpriteWithId(1L);
+        Artwork newArtwork = mockArtworkWithId(1L);
         //when
-        service.update(newSprite);
+        service.update(newArtwork);
         //then
-        verify(repository).save(newSprite);
+        verify(repository).save(newArtwork);
     }
 
     @Test
-    void deleteSpriteSuccess() throws Exception {
+    void deleteArtworkSuccess() throws Exception {
         //when
         service.delete(1L);
         //then
         verify(repository).deleteById(1L);
     }
 
-    Sprite mockSprite() {
-        Sprite sprite = new Sprite();
-        sprite.setArtWork("dummy.url/pikachu-default");
-        sprite.setFrontFemale("dummy.url/pikachu-female");
-        return sprite;
+    Artwork mockArtwork() {
+        Artwork artWork = new Artwork();
+        artWork.setArtWork("dummy.url/pikachu-default");
+        return artWork;
     }
 
-    Sprite mockSpriteWithId(long id) {
-        Sprite sprite = new Sprite();
-        sprite.setId(id);
-        sprite.setArtWork("dummy.url/pikachu-default");
-        sprite.setFrontFemale("dummy.url/pikachu-female");
-        return sprite;
+    Artwork mockArtworkWithId(long id) {
+        Artwork artWork = new Artwork();
+        artWork.setId(id);
+        artWork.setArtWork("dummy.url/pikachu-default");
+        return artWork;
     }
 }
