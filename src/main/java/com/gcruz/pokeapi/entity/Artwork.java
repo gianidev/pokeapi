@@ -11,7 +11,7 @@ public class Artwork {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "artwork_id")
     private long id;
-    private String artWork;
+    private String url;
     @JsonBackReference
     @OneToOne(mappedBy = "artwork")
     private Pokemon pokemon;
@@ -24,12 +24,12 @@ public class Artwork {
         this.id = id;
     }
 
-    public String getArtWork() {
-        return artWork;
+    public String getUrl() {
+        return url;
     }
 
-    public void setArtWork(String artWork) {
-        this.artWork = artWork;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Pokemon getPokemon() {

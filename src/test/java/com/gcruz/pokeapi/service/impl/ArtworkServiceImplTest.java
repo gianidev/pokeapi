@@ -85,14 +85,14 @@ class ArtworkServiceImplTest {
 
     Artwork mockArtwork() {
         Artwork artWork = new Artwork();
-        artWork.setArtWork("dummy.url/pikachu-default");
+        artWork.setUrl("dummy.url/pikachu-default");
         return artWork;
     }
 
     Artwork mockArtworkWithId(long id) {
         Artwork artWork = new Artwork();
         artWork.setId(id);
-        artWork.setArtWork("dummy.url/pikachu-default");
+        artWork.setUrl("dummy.url/pikachu-default");
         return artWork;
     }
 }
