@@ -1,5 +1,7 @@
 package com.gcruz.pokeapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -7,6 +9,7 @@ import javax.validation.constraints.NotNull;
 public class Stats {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "stats_id")
     private Long id;
     @NotNull
     private int healthPoints;
@@ -22,6 +25,8 @@ public class Stats {
     private int speed;
     @NotNull
     private int total;
+    @OneToOne(mappedBy = "stats")
+    private Pokemon pokemon;
 
     public Stats() {
     }
@@ -89,4 +94,5 @@ public class Stats {
     public void setTotal(int total) {
         this.total = total;
     }
+
 }

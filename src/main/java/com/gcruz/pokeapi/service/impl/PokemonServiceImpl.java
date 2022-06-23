@@ -48,7 +48,7 @@ public class PokemonServiceImpl implements PokemonService {
             logger.info("Fetching all Pokemon.");
             return (List<Pokemon>) repository.findAll();
         } catch (Exception e) {
-            throw new Exception("Error while fetching all pokemon.");
+            throw new Exception("Error while fetching all pokemon." + e.getMessage());
         }
     }
 

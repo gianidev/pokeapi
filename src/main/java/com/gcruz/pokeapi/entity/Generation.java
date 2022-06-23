@@ -7,22 +7,20 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-@Table(name = "generation")
+@Table(name = "generations")
 public class Generation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "generation_id")
     private Long id;
     @NotNull
     private String name;
     @OneToOne
-    @JoinColumn(name = "region_id", referencedColumnName = "id")
+    @JoinColumn(name = "region_id")
     private Region mainRegion;
     @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "generation")
     private List<Pokemon> pokemonList;
-    @OneToMany
-    private List<Type> types;
 
     public Generation() {
     }
@@ -57,13 +55,5 @@ public class Generation {
 
     public void setPokemonList(List<Pokemon> pokemonList) {
         this.pokemonList = pokemonList;
-    }
-
-    public List<Type> getTypes() {
-        return types;
-    }
-
-    public void setTypes(List<Type> types) {
-        this.types = types;
     }
 }

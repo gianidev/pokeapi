@@ -3,11 +3,11 @@ package com.gcruz.pokeapi.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "region")
+@Table(name = "regions")
 public class Region {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "region_id")
     private long id;
     private String name;
 

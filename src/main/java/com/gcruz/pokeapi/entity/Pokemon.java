@@ -1,6 +1,7 @@
 package com.gcruz.pokeapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -8,27 +9,31 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "pokemon")
+@Table(name = "pokemons")
 public class Pokemon implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "pokemon_id")
     private Long id;
     @NotNull
     private String name;
     private int height;
     private int weight;
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "generation_id")
-    @NotNull
     private Generation generation;
     @OneToOne
+    @JoinColumn(name = "stats_id", unique = true)
     private Stats stats;
     @ManyToOne
+    @JoinColumn(name = "region_id")
     private Region region;
     @ManyToMany
     private List<Type> type;
+    @JsonManagedReference
     @OneToOne
+    @JoinColumn(name = "sprite_id")
     private Sprite sprite;
 
     public Pokemon() {

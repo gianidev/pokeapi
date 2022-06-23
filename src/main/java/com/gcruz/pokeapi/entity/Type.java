@@ -1,18 +1,26 @@
 package com.gcruz.pokeapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "type")
+@Table(name = "types")
 public class Type {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "type_id")
     private long id;
     private String name;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "damage_relation_id")
     private DamageRelation damageRelation;
     @ManyToMany
+    @JoinTable(
+            name = "pokemon_type",
+            joinColumns = @JoinColumn(name = "pokemon_id"),
+            inverseJoinColumns = @JoinColumn(name = "type_id"))
     private List<Pokemon> pokemonList;
 
     public Type() {
@@ -23,7 +31,6 @@ public class Type {
         this.id = id;
         this.name = name;
         this.damageRelation = damageRelation;
-        this.pokemonList = pokemonList;
     }
 
     public long getId() {
@@ -57,5 +64,4 @@ public class Type {
     public void setPokemonList(List<Pokemon> pokemonList) {
         this.pokemonList = pokemonList;
     }
-
 }
