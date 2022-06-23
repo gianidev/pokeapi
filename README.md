@@ -20,7 +20,7 @@ For building and running the application you need:
 There are several ways to run a Spring Boot application on your local machine. One way is to execute the `main` method in the `com.gcruz.pokeapi.PokeApiApplication` class from your IDE. Remember to configure the posgresql db on your machine.
 
 
-Alternatively you can use `docker-compose` commands to start, or stop this application and the database, i.e
+Alternatively you can use `docker-compose` commands to start or stop this application and its database, i.e
 
 ```shell
 docker-compose up
