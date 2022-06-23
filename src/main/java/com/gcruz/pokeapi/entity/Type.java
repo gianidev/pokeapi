@@ -1,6 +1,8 @@
 package com.gcruz.pokeapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,14 +15,12 @@ public class Type {
     @Column(name = "type_id")
     private long id;
     private String name;
+    @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "damage_relation_id")
     private DamageRelation damageRelation;
-    @ManyToMany
-    @JoinTable(
-            name = "pokemons_type",
-            joinColumns = @JoinColumn(name = "pokemon_id"),
-            inverseJoinColumns = @JoinColumn(name = "type_id"))
+    @JsonIgnoreProperties("types")
+    @ManyToMany(mappedBy = "types")
     private List<Pokemon> pokemonList;
 
     public Type() {

@@ -1,5 +1,7 @@
 package com.gcruz.pokeapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,18 +14,21 @@ public class DamageRelation {
     private long id;
     @OneToOne(mappedBy = "damageRelation")
     private Type type;
+    @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "dmg_effectiveness",
             joinColumns = @JoinColumn(name = "damage_relation_id"),
             inverseJoinColumns = @JoinColumn(name = "type_id"))
     private List<Type> effectiveAgainst;
+    @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "dmg_weakness",
             joinColumns = @JoinColumn(name = "damage_relation_id"),
             inverseJoinColumns = @JoinColumn(name = "type_id"))
     private List<Type> weakAgainst;
+    @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "dmg_resistance",

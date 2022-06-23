@@ -1,6 +1,7 @@
 package com.gcruz.pokeapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -17,8 +18,8 @@ public class Pokemon implements Serializable {
     private Long id;
     @NotNull
     private String name;
-    private int height;
-    private int weight;
+    private float height;
+    private float weight;
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "generation_id")
@@ -29,8 +30,13 @@ public class Pokemon implements Serializable {
     @ManyToOne
     @JoinColumn(name = "region_id")
     private Region region;
+    @JsonIgnoreProperties("pokemonList")
     @ManyToMany
-    private List<Type> type;
+    @JoinTable(
+            name = "pokemon_type",
+            joinColumns = @JoinColumn(name = "pokemon_id"),
+            inverseJoinColumns = @JoinColumn(name = "type_id"))
+    private List<Type> types;
     @JsonManagedReference
     @OneToOne
     @JoinColumn(name = "artwork_id")
@@ -39,8 +45,8 @@ public class Pokemon implements Serializable {
     public Pokemon() {
     }
 
-    public Pokemon(Long id, String name, int height, int weight, Generation generation, Stats stats, Region region,
-                   List<Type> type, Artwork artwork) {
+    public Pokemon(Long id, String name, float height, float weight, Generation generation, Stats stats, Region region,
+                   List<Type> types, Artwork artwork) {
         this.id = id;
         this.name = name;
         this.height = height;
@@ -48,7 +54,7 @@ public class Pokemon implements Serializable {
         this.generation = generation;
         this.stats = stats;
         this.region = region;
-        this.type = type;
+        this.types = types;
         this.artwork = artwork;
     }
 
@@ -68,19 +74,19 @@ public class Pokemon implements Serializable {
         this.name = name;
     }
 
-    public int getHeight() {
+    public float getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(float height) {
         this.height = height;
     }
 
-    public int getWeight() {
+    public float getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(float weight) {
         this.weight = weight;
     }
 
@@ -108,12 +114,12 @@ public class Pokemon implements Serializable {
         this.region = region;
     }
 
-    public List<Type> getType() {
-        return type;
+    public List<Type> getTypes() {
+        return types;
     }
 
-    public void setType(List<Type> type) {
-        this.type = type;
+    public void setTypes(List<Type> types) {
+        this.types = types;
     }
 
     public Artwork getArtwork() {
