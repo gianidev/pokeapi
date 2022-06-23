@@ -1,6 +1,6 @@
 # PokeAPI
 
-This API has been created to register and fetch Pokemon data, like a Pokedéx. <img src="https://img.pokemondb.net/sprites/home/normal/pikachu-original-cap.png" align="right" />
+This API has been created to register and fetch Pokémon data, like a Pokedéx. <img src="https://img.pokemondb.net/sprites/home/normal/pikachu-original-cap.png" align="right" />
 ## Requirements
 
 For building and running the application you need:
@@ -14,12 +14,11 @@ For building and running the application you need:
 There are several ways to run a Spring Boot application on your local machine. One way is to execute the `main` method in the `com.gcruz.pokeapi.PokeApiApplication` class from your IDE. Remember to configure the posgresql db on your machine.
 
 
-Alternatively you can use the **Docker Compose** commands to start both application and db with the next command:
+Alternatively you can use the `docker-compose` commands to start and stop both application and db with the next command:
 
 ```shell
 docker-compose up
 ```
-You can use other `docker-compose` commands as you needed.
 
 ### Application properties (w/docker)
 - Server port: `8081`
@@ -32,3 +31,10 @@ Username: postgres
 Password: postgres
 ```
 
+## API Collection
+In the link below you will find the Postman collection with pre-made examples.
+
+[PokeAPI Postman Collection](https://documenter.getpostman.com/view/17083920/UzBjt8H6)
+
+## Credits
+Pokémon artwork and sprites urls used on this Api has been obtained from [Pokémon Database](https://pokemondb.net/) page.
