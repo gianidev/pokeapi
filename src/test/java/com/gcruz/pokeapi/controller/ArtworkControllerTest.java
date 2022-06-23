@@ -106,7 +106,7 @@ class SpriteControllerTest {
 
     Sprite mockSprite() {
         Sprite sprite = new Sprite();
-        sprite.setFontDefault("dummy.url/pikachu-default");
+        sprite.setArtWork("dummy.url/pikachu-default");
         sprite.setFrontFemale("dummy.url/pikachu-female");
         return sprite;
     }
@@ -114,7 +114,7 @@ class SpriteControllerTest {
     Sprite mockSpriteWithId(long id) {
         Sprite sprite = new Sprite();
         sprite.setId(id);
-        sprite.setFontDefault("dummy.url/pikachu-default");
+        sprite.setArtWork("dummy.url/pikachu-default");
         sprite.setFrontFemale("dummy.url/pikachu-female");
         return sprite;
     }

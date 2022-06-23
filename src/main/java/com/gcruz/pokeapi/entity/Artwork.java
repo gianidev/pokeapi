@@ -11,7 +11,7 @@ public class Sprite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sprite_id")
     private long id;
-    private String fontDefault;
+    private String artWork;
     private String frontFemale;
     @JsonBackReference
     @OneToOne(mappedBy = "sprite")
@@ -25,12 +25,12 @@ public class Sprite {
         this.id = id;
     }
 
-    public String getFontDefault() {
-        return fontDefault;
+    public String getArtWork() {
+        return artWork;
     }
 
-    public void setFontDefault(String fontDefault) {
-        this.fontDefault = fontDefault;
+    public void setArtWork(String artWork) {
+        this.artWork = artWork;
     }
 
     public String getFrontFemale() {
