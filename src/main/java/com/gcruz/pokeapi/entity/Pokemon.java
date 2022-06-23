@@ -18,12 +18,13 @@ public class Pokemon implements Serializable {
     private Long id;
     @NotNull
     private String name;
-    private float height;
-    private float weight;
+    private int height;
+    private int weight;
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "generation_id")
     private Generation generation;
+    @JsonIgnoreProperties("pokemon")
     @OneToOne
     @JoinColumn(name = "stats_id", unique = true)
     private Stats stats;
@@ -45,7 +46,7 @@ public class Pokemon implements Serializable {
     public Pokemon() {
     }
 
-    public Pokemon(Long id, String name, float height, float weight, Generation generation, Stats stats, Region region,
+    public Pokemon(Long id, String name, int height, int weight, Generation generation, Stats stats, Region region,
                    List<Type> types, Artwork artwork) {
         this.id = id;
         this.name = name;
@@ -74,19 +75,19 @@ public class Pokemon implements Serializable {
         this.name = name;
     }
 
-    public float getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(float height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
-    public float getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(float weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
