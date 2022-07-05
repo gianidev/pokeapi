@@ -21,7 +21,7 @@ public class TypeController {
         this.service = service;
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping
     private ResponseEntity<List<Type>> findAll() throws Exception {
         return new ResponseEntity<List<Type>>(service.findAll(), HttpStatus.OK);
     }

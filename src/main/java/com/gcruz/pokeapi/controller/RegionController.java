@@ -21,7 +21,7 @@ public class RegionController {
         this.service = service;
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping
     private ResponseEntity<List<Region>> findAll() throws Exception {
         return new ResponseEntity<List<Region>>(service.findAll(), HttpStatus.OK);
     }

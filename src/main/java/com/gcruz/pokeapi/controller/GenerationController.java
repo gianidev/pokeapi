@@ -21,7 +21,7 @@ public class GenerationController {
         this.service = service;
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping
     private ResponseEntity<List<Generation>> findAll() throws Exception {
         return new ResponseEntity<List<Generation>>(service.findAll(), HttpStatus.OK);
     }

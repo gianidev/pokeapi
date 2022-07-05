@@ -21,7 +21,7 @@ public class PokemonController {
         this.service = service;
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping
     private ResponseEntity<List<Pokemon>> findAll() throws Exception {
         return new ResponseEntity<List<Pokemon>>(service.findAll(), HttpStatus.OK);
     }
@@ -31,7 +31,7 @@ public class PokemonController {
         return new ResponseEntity<Pokemon>(service.findById(id), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping(params = "name")
     public ResponseEntity<Pokemon> findByName(@RequestParam("name") String name) throws NotFoundException {
         return new ResponseEntity<Pokemon>(service.findByName(name), HttpStatus.OK);
     }

@@ -21,7 +21,7 @@ public class StatsController {
         this.service = service;
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping
     public ResponseEntity<List<Stats>> findAll() throws Exception {
         return new ResponseEntity<List<Stats>>(service.findAll(), HttpStatus.OK);
     }

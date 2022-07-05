@@ -20,7 +20,7 @@ public class ArtworkController {
         this.service = service;
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping
     private ResponseEntity<List<Artwork>> findAll() throws Exception {
         return new ResponseEntity<List<Artwork>>(service.findAll(), HttpStatus.OK);
     }
