@@ -29,15 +29,11 @@ class PokemonServiceImplTest {
 
     @Mock
     private PokemonRepository repository;
-    @Mock
-    private GenerationService generationService;
-    @Mock
-    private StatsService statsService;
     private PokemonService pokemonService;
 
     @BeforeEach
     void setUp() {
-        pokemonService = new PokemonServiceImpl(repository, generationService, statsService);
+        pokemonService = new PokemonServiceImpl(repository);
     }
 
     @Test

@@ -3,7 +3,7 @@ package com.gcruz.pokeapi.controller;
 import com.gcruz.pokeapi.entity.Artwork;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.service.ArtworkService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,13 +12,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("artwork")
+@AllArgsConstructor
 public class ArtworkController {
     ArtworkService service;
-
-    @Autowired
-    public ArtworkController(ArtworkService service) {
-        this.service = service;
-    }
 
     @GetMapping
     private ResponseEntity<List<Artwork>> findAll() throws Exception {

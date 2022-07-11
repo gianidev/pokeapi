@@ -31,15 +31,11 @@ class PokemonControllerTest {
     private PokemonService service;
     @Mock
     private PokemonRepository repository;
-    @Mock
-    private GenerationService generationService;
-    @Mock
-    private StatsService statsService;
     private PokemonController controller;
 
     @BeforeEach
     void setUp() {
-        service = new PokemonServiceImpl(repository, generationService, statsService);
+        service = new PokemonServiceImpl(repository);
         controller = new PokemonController(service);
     }
 

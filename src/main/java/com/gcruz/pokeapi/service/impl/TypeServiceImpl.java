@@ -4,28 +4,24 @@ import com.gcruz.pokeapi.entity.Type;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.TypeRepository;
 import com.gcruz.pokeapi.service.TypeService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
+@Slf4j
 public class TypeServiceImpl implements TypeService {
-    private final TypeRepository repository;
-    private static final Logger logger = LogManager.getLogger(TypeServiceImpl.class);
 
-    @Autowired
-    public TypeServiceImpl(TypeRepository repository) {
-        this.repository = repository;
-    }
+    private final TypeRepository repository;
 
     @Override
     public Type create(Type type) throws Exception {
         try {
-            logger.info("Saving Type in database.");
+            log.info("Saving Type in database.");
             return repository.save(type);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -35,7 +31,7 @@ public class TypeServiceImpl implements TypeService {
     @Override
     public List<Type> findAll() throws Exception {
         try {
-            logger.info("Fetching all Type.");
+            log.info("Fetching all Type.");
             return (List<Type>) repository.findAll();
         } catch (Exception e) {
             throw new Exception("Error while fetching all type.");
@@ -46,7 +42,7 @@ public class TypeServiceImpl implements TypeService {
     public Type findById(long id) throws NotFoundException {
         Optional<Type> optional = repository.findById(id);
         if (optional.isPresent()) {
-            logger.info(String.format("Type with id %s has been found.", id));
+            log.info(String.format("Type with id %s has been found.", id));
             return optional.get();
         } else throw new NotFoundException(String.format("Type with id %s not found", id));
     }
@@ -55,7 +51,7 @@ public class TypeServiceImpl implements TypeService {
     @Override
     public Type update(Type type) throws Exception {
         try {
-            logger.info(String.format("Updating Type with id %s .", type.getId()));
+            log.info(String.format("Updating Type with id %s .", type.getId()));
             return repository.save(type);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -65,7 +61,7 @@ public class TypeServiceImpl implements TypeService {
     @Override
     public void delete(long id) throws Exception {
         try {
-            logger.info(String.format("Deleting Type with id %s.", id));
+            log.info(String.format("Deleting Type with id %s.", id));
             repository.deleteById(id);
         } catch (Exception e) {
             throw new Exception(e.getMessage());

@@ -1,11 +1,14 @@
 package com.gcruz.pokeapi.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity(name = "stats")
+@Data
+@NoArgsConstructor
 public class Stats {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,72 +30,4 @@ public class Stats {
     private int total;
     @OneToOne(mappedBy = "stats")
     private Pokemon pokemon;
-
-    public Stats() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getHealthPoints() {
-        return healthPoints;
-    }
-
-    public void setHealthPoints(int healthPoints) {
-        this.healthPoints = healthPoints;
-    }
-
-    public int getAttack() {
-        return attack;
-    }
-
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-
-    public int getDefense() {
-        return defense;
-    }
-
-    public void setDefense(int defense) {
-        this.defense = defense;
-    }
-
-    public int getSpeedAttack() {
-        return speedAttack;
-    }
-
-    public void setSpeedAttack(int speedAttack) {
-        this.speedAttack = speedAttack;
-    }
-
-    public int getSpeedDefense() {
-        return speedDefense;
-    }
-
-    public void setSpeedDefense(int speedDefense) {
-        this.speedDefense = speedDefense;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
-    }
-
 }

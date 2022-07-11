@@ -3,7 +3,7 @@ package com.gcruz.pokeapi.controller;
 import com.gcruz.pokeapi.entity.Stats;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.service.StatsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,14 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("stats")
+@AllArgsConstructor
 public class StatsController {
 
     StatsService service;
-
-    @Autowired
-    public StatsController(StatsService service) {
-        this.service = service;
-    }
 
     @GetMapping
     public ResponseEntity<List<Stats>> findAll() throws Exception {

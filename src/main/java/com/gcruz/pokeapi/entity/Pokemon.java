@@ -3,6 +3,8 @@ package com.gcruz.pokeapi.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,6 +13,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "pokemons")
+@Data
+@NoArgsConstructor
 public class Pokemon implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,92 +46,4 @@ public class Pokemon implements Serializable {
     @OneToOne
     @JoinColumn(name = "artwork_id")
     private Artwork artwork;
-
-    public Pokemon() {
-    }
-
-    public Pokemon(Long id, String name, int height, int weight, Generation generation, Stats stats, Region region,
-                   List<Type> types, Artwork artwork) {
-        this.id = id;
-        this.name = name;
-        this.height = height;
-        this.weight = weight;
-        this.generation = generation;
-        this.stats = stats;
-        this.region = region;
-        this.types = types;
-        this.artwork = artwork;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    public Generation getGeneration() {
-        return generation;
-    }
-
-    public void setGeneration(Generation generation) {
-        this.generation = generation;
-    }
-
-    public Stats getStats() {
-        return stats;
-    }
-
-    public void setStats(Stats stats) {
-        this.stats = stats;
-    }
-
-    public Region getRegion() {
-        return region;
-    }
-
-    public void setRegion(Region region) {
-        this.region = region;
-    }
-
-    public List<Type> getTypes() {
-        return types;
-    }
-
-    public void setTypes(List<Type> types) {
-        this.types = types;
-    }
-
-    public Artwork getArtwork() {
-        return artwork;
-    }
-
-    public void setArtwork(Artwork artWork) {
-        this.artwork = artWork;
-    }
 }

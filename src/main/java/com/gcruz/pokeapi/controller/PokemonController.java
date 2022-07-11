@@ -3,7 +3,7 @@ package com.gcruz.pokeapi.controller;
 import com.gcruz.pokeapi.entity.Pokemon;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.service.PokemonService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,14 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pokemon")
+@AllArgsConstructor
 public class PokemonController {
 
     PokemonService service;
-
-    @Autowired
-    public PokemonController(PokemonService service) {
-        this.service = service;
-    }
 
     @GetMapping
     private ResponseEntity<List<Pokemon>> findAll() throws Exception {

@@ -3,7 +3,7 @@ package com.gcruz.pokeapi.controller;
 import com.gcruz.pokeapi.entity.Generation;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.service.GenerationService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,14 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("generation")
+@AllArgsConstructor
 public class GenerationController {
 
     GenerationService service;
-
-    @Autowired
-    public GenerationController(GenerationService service) {
-        this.service = service;
-    }
 
     @GetMapping
     private ResponseEntity<List<Generation>> findAll() throws Exception {
