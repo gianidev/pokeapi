@@ -1,8 +1,8 @@
 package com.gcruz.pokeapi.controller;
 
-import com.gcruz.pokeapi.entity.Artwork;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.ArtworkRepository;
+import com.gcruz.pokeapi.repository.model.Artwork;
 import com.gcruz.pokeapi.service.ArtworkService;
 import com.gcruz.pokeapi.service.impl.ArtworkServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,8 +44,8 @@ class ArtworkControllerTest {
         //then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
-        Artwork artWork = response.getBody();
-        assertThat(artWork.getId()).isEqualTo(1L);
+        Artwork artwork = response.getBody();
+        assertThat(artwork.getId()).isEqualTo(1L);
     }
 
     @Test
@@ -73,22 +73,21 @@ class ArtworkControllerTest {
         //then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
-        Artwork artWork = response.getBody();
-        assertThat(artWork.getId()).isEqualTo(1L);
+        Artwork artwork = response.getBody();
+        assertThat(artwork.getId()).isEqualTo(1L);
     }
 
 
     @Test
     void updateArtworkSuccess() throws Exception {
         //when
-        when(repository.save(any())).thenReturn(mockArtworkWithId(1L));
+        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockArtworkWithId(1L)));
         ResponseEntity<Artwork> response = controller.update(mockArtworkWithId(1L));
 
         //then
         verify(repository).save(any());
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-
         assertThat(response.getBody()).isNotNull();
         assertThat(response.getBody().getId()).isEqualTo(1L);
     }
@@ -105,15 +104,15 @@ class ArtworkControllerTest {
 
 
     Artwork mockArtwork() {
-        Artwork artWork = new Artwork();
-        artWork.setUrl("dummy.url/pikachu-default");
-        return artWork;
+        Artwork artwork = new Artwork();
+        artwork.setUrl("dummy.url/pikachu-default");
+        return artwork;
     }
 
     Artwork mockArtworkWithId(long id) {
-        Artwork artWork = new Artwork();
-        artWork.setId(id);
-        artWork.setUrl("dummy.url/pikachu-default");
-        return artWork;
+        Artwork artwork = new Artwork();
+        artwork.setId(id);
+        artwork.setUrl("dummy.url/pikachu-default");
+        return artwork;
     }
 }

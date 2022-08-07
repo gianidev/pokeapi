@@ -1,8 +1,8 @@
 package com.gcruz.pokeapi.service.impl;
 
-import com.gcruz.pokeapi.entity.Region;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.RegionRepository;
+import com.gcruz.pokeapi.repository.model.Region;
 import com.gcruz.pokeapi.service.RegionService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ import java.util.Optional;
 public class RegionServiceImpl implements RegionService {
 
     private final RegionRepository repository;
-   
+
     @Override
     public Region create(Region region) throws Exception {
         try {
@@ -52,7 +52,8 @@ public class RegionServiceImpl implements RegionService {
     public Region update(Region region) throws Exception {
         try {
             log.info(String.format("Updating Region with id %s .", region.getId()));
-            return repository.save(region);
+            repository.save(region);
+            return findById(region.getId());
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

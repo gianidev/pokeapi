@@ -1,7 +1,8 @@
 package com.gcruz.pokeapi.controller;
 
-import com.gcruz.pokeapi.entity.Artwork;
+import com.gcruz.pokeapi.dto.ArtworkDTO;
 import com.gcruz.pokeapi.exception.NotFoundException;
+import com.gcruz.pokeapi.repository.model.Artwork;
 import com.gcruz.pokeapi.service.ArtworkService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.util.List;
 @RequestMapping("artwork")
 @AllArgsConstructor
 public class ArtworkController {
+
     ArtworkService service;
 
     @GetMapping
@@ -27,13 +29,13 @@ public class ArtworkController {
     }
 
     @PostMapping
-    public ResponseEntity<Artwork> create(@RequestBody Artwork artWork) throws Exception {
-        return new ResponseEntity<Artwork>(service.create(artWork), HttpStatus.CREATED);
+    public ResponseEntity<Artwork> create(@RequestBody Artwork artwork) throws Exception {
+        return new ResponseEntity<Artwork>(service.create(artwork), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Artwork> update(@RequestBody Artwork artWork) throws Exception {
-        return new ResponseEntity<Artwork>(service.update(artWork), HttpStatus.OK);
+    public ResponseEntity<Artwork> update(@RequestBody Artwork artwork) throws Exception {
+        return new ResponseEntity<Artwork>(service.update(artwork), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")

@@ -1,6 +1,6 @@
 package com.gcruz.pokeapi.controller;
 
-import com.gcruz.pokeapi.entity.Stats;
+import com.gcruz.pokeapi.repository.model.Stats;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.StatsRepository;
 import com.gcruz.pokeapi.service.StatsService;
@@ -76,6 +76,7 @@ class StatsControllerTest {
     @Test
     void updateStatsSuccess() throws Exception {
         //when
+        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockStats()));
         ResponseEntity<Stats> response = controller.update(mockStats());
         //then
         verify(repository).save(any());

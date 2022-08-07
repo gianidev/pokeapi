@@ -1,6 +1,6 @@
 package com.gcruz.pokeapi.service.impl;
 
-import com.gcruz.pokeapi.entity.Pokemon;
+import com.gcruz.pokeapi.repository.model.Pokemon;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.PokemonRepository;
 import com.gcruz.pokeapi.service.PokemonService;
@@ -58,11 +58,12 @@ public class PokemonServiceImpl implements PokemonService {
     }
 
     @Override
-    public void update(Pokemon pokemon) throws Exception {
+    public Pokemon update(Pokemon pokemon) throws Exception {
         try {
             verifyValues(pokemon);
             log.info(String.format("Updating Pokemon with id %s .", pokemon.getId()));
             repository.save(pokemon);
+            return findById(pokemon.getId());
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

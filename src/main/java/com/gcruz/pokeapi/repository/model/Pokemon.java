@@ -1,8 +1,10 @@
-package com.gcruz.pokeapi.model;
+package com.gcruz.pokeapi.repository.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +17,8 @@ import java.util.List;
 @Table(name = "pokemons")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Pokemon implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +36,7 @@ public class Pokemon implements Serializable {
     @OneToOne
     @JoinColumn(name = "stats_id", unique = true)
     private Stats stats;
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "region_id")
     private Region region;

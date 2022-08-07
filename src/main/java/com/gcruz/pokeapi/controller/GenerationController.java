@@ -1,6 +1,6 @@
 package com.gcruz.pokeapi.controller;
 
-import com.gcruz.pokeapi.entity.Generation;
+import com.gcruz.pokeapi.repository.model.Generation;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.service.GenerationService;
 import lombok.AllArgsConstructor;
@@ -33,9 +33,8 @@ public class GenerationController {
     }
 
     @PutMapping
-    public ResponseEntity update(@RequestBody Generation generation) throws Exception {
-        service.update(generation);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Generation> update(@RequestBody Generation generation) throws Exception {
+        return new ResponseEntity<Generation>(service.update(generation), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")

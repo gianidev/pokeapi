@@ -1,6 +1,6 @@
 package com.gcruz.pokeapi.service.impl;
 
-import com.gcruz.pokeapi.entity.Generation;
+import com.gcruz.pokeapi.repository.model.Generation;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.GenerationRepository;
 import com.gcruz.pokeapi.service.GenerationService;
@@ -48,10 +48,11 @@ public class GenerationServiceImpl implements GenerationService {
     }
 
     @Override
-    public void update(Generation generation) throws Exception {
+    public Generation update(Generation generation) throws Exception {
         try {
             log.info(String.format("Updating generation with id %s .", generation.getId()));
             repository.save(generation);
+            return findById(generation.getId());
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

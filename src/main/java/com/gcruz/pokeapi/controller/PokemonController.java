@@ -1,7 +1,8 @@
 package com.gcruz.pokeapi.controller;
 
-import com.gcruz.pokeapi.entity.Pokemon;
 import com.gcruz.pokeapi.exception.NotFoundException;
+import com.gcruz.pokeapi.repository.model.Generation;
+import com.gcruz.pokeapi.repository.model.Pokemon;
 import com.gcruz.pokeapi.service.PokemonService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -38,9 +39,8 @@ public class PokemonController {
     }
 
     @PutMapping
-    public ResponseEntity update(@RequestBody Pokemon pokemon) throws Exception {
-        service.update(pokemon);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Pokemon> update(@RequestBody Pokemon pokemon) throws Exception {
+        return new ResponseEntity<Pokemon>(service.update(pokemon), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")

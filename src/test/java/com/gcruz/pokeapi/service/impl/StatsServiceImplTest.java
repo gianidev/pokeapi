@@ -1,6 +1,6 @@
 package com.gcruz.pokeapi.service.impl;
 
-import com.gcruz.pokeapi.entity.Stats;
+import com.gcruz.pokeapi.repository.model.Stats;
 import com.gcruz.pokeapi.repository.StatsRepository;
 import com.gcruz.pokeapi.service.StatsService;
 import org.junit.jupiter.api.BeforeEach;
@@ -60,6 +60,7 @@ class StatsServiceImplTest {
         //given
         Stats stats = mockStats();
         //when
+        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(stats));
         service.update(stats);
         //then
         verify(repository).save(stats);

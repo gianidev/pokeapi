@@ -1,13 +1,11 @@
 package com.gcruz.pokeapi.controller;
 
-import com.gcruz.pokeapi.entity.Generation;
-import com.gcruz.pokeapi.entity.Pokemon;
-import com.gcruz.pokeapi.entity.Stats;
+import com.gcruz.pokeapi.repository.model.Generation;
+import com.gcruz.pokeapi.repository.model.Pokemon;
+import com.gcruz.pokeapi.repository.model.Stats;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.PokemonRepository;
-import com.gcruz.pokeapi.service.GenerationService;
 import com.gcruz.pokeapi.service.PokemonService;
-import com.gcruz.pokeapi.service.StatsService;
 import com.gcruz.pokeapi.service.impl.PokemonServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -81,6 +79,7 @@ class PokemonControllerTest {
     @Test
     void updatePokemonSuccess() throws Exception {
         //when
+        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockPokemon()));
         ResponseEntity<Pokemon> response = controller.update(mockPokemon());
         //then
         verify(repository).save(any());

@@ -1,6 +1,6 @@
 package com.gcruz.pokeapi.repository;
 
-import com.gcruz.pokeapi.entity.Region;
+import com.gcruz.pokeapi.repository.model.Region;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

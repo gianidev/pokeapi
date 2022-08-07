@@ -1,6 +1,6 @@
 package com.gcruz.pokeapi.controller;
 
-import com.gcruz.pokeapi.entity.Type;
+import com.gcruz.pokeapi.repository.model.Type;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.service.TypeService;
 import lombok.AllArgsConstructor;

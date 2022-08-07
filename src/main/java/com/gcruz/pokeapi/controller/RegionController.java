@@ -1,6 +1,6 @@
 package com.gcruz.pokeapi.controller;
 
-import com.gcruz.pokeapi.entity.Region;
+import com.gcruz.pokeapi.repository.model.Region;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.service.RegionService;
 import lombok.AllArgsConstructor;

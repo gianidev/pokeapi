@@ -1,6 +1,6 @@
 package com.gcruz.pokeapi.controller;
 
-import com.gcruz.pokeapi.entity.Type;
+import com.gcruz.pokeapi.repository.model.Type;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.TypeRepository;
 import com.gcruz.pokeapi.service.TypeService;
@@ -77,6 +77,7 @@ class TypeControllerTest {
     @Test
     void updateTypeSuccess() throws Exception {
         //when
+        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockType()));
         ResponseEntity<Type> response = controller.update(mockType());
         //then
         verify(repository).save(any());

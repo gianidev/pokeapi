@@ -1,7 +1,7 @@
 package com.gcruz.pokeapi.service.impl;
 
-import com.gcruz.pokeapi.entity.Region;
 import com.gcruz.pokeapi.repository.RegionRepository;
+import com.gcruz.pokeapi.repository.model.Region;
 import com.gcruz.pokeapi.service.RegionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +29,7 @@ class RegionServiceImplTest {
     @Test
     void createRegionSuccess() throws Exception {
         //given
-        Region region = new Region(1L, "Kanto");
+        Region region = Region.builder().id(1L).name("Kanto").build();
         //when
         service.create(region);
         //then
@@ -38,9 +38,9 @@ class RegionServiceImplTest {
 
 
     @Test
-    void seachRegionByIdSuccess() throws Exception {
+    void searchRegionByIdSuccess() throws Exception {
         //when
-        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(new Region(1L, "Kanto")));
+        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(Region.builder().id(1L).name("Kanto").build()));
         Region region = service.findById(1L);
         //then
         verify(repository).findById(1L);
@@ -58,8 +58,9 @@ class RegionServiceImplTest {
     @Test
     void updateRegionSuccess() throws Exception {
         //given
-        Region region = new Region(1L, "Kanto");
+        Region region = Region.builder().id(1L).name("Kanto").build();
         //when
+        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(region));
         service.update(region);
         //then
         verify(repository).save(region);

@@ -1,6 +1,8 @@
-package com.gcruz.pokeapi.model;
+package com.gcruz.pokeapi.repository.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +14,8 @@ import java.util.List;
 @Table(name = "generations")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Generation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

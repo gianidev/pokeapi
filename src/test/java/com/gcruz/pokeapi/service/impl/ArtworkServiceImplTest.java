@@ -1,7 +1,7 @@
 package com.gcruz.pokeapi.service.impl;
 
-import com.gcruz.pokeapi.entity.Artwork;
 import com.gcruz.pokeapi.repository.ArtworkRepository;
+import com.gcruz.pokeapi.repository.model.Artwork;
 import com.gcruz.pokeapi.service.ArtworkService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,21 +32,21 @@ class ArtworkServiceImplTest {
     @Test
     void createArtworkSuccess() throws Exception {
         //given
-        Artwork artWork = mockArtwork();
+        Artwork artwork = mockArtwork();
         //when
-        service.create(artWork);
+        service.create(artwork);
         //then
-        verify(repository).save(artWork);
+        verify(repository).save(artwork);
     }
 
     @Test
     void searchArtworkSuccess() throws Exception {
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockArtworkWithId(1L)));
-        Artwork artWork = service.findById(1L);
+        Artwork artwork = service.findById(1L);
         //then
         verify(repository).findById(1L);
-        assertThat(artWork.getId()).isNotNull();
+        assertThat(artwork.getId()).isNotNull();
     }
 
     @Test
@@ -68,11 +68,12 @@ class ArtworkServiceImplTest {
     @Test
     void updateArtworkSuccess() throws Exception {
         //given
-        Artwork newArtwork = mockArtworkWithId(1L);
+        Artwork artwork = mockArtworkWithId(1L);
         //when
-        service.update(newArtwork);
+        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(artwork));
+        service.update(artwork);
         //then
-        verify(repository).save(newArtwork);
+        verify(repository).save(artwork);
     }
 
     @Test
@@ -84,15 +85,15 @@ class ArtworkServiceImplTest {
     }
 
     Artwork mockArtwork() {
-        Artwork artWork = new Artwork();
-        artWork.setUrl("dummy.url/pikachu-default");
-        return artWork;
+        Artwork artwork = new Artwork();
+        artwork.setUrl("dummy.url/pikachu-default");
+        return artwork;
     }
 
     Artwork mockArtworkWithId(long id) {
-        Artwork artWork = new Artwork();
-        artWork.setId(id);
-        artWork.setUrl("dummy.url/pikachu-default");
-        return artWork;
+        Artwork artwork = new Artwork();
+        artwork.setId(id);
+        artwork.setUrl("dummy.url/pikachu-default");
+        return artwork;
     }
 }

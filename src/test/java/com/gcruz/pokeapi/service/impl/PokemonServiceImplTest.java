@@ -1,13 +1,11 @@
 package com.gcruz.pokeapi.service.impl;
 
-import com.gcruz.pokeapi.entity.Generation;
-import com.gcruz.pokeapi.entity.Pokemon;
-import com.gcruz.pokeapi.entity.Stats;
+import com.gcruz.pokeapi.repository.model.Generation;
+import com.gcruz.pokeapi.repository.model.Pokemon;
+import com.gcruz.pokeapi.repository.model.Stats;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.PokemonRepository;
-import com.gcruz.pokeapi.service.GenerationService;
 import com.gcruz.pokeapi.service.PokemonService;
-import com.gcruz.pokeapi.service.StatsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -72,7 +70,6 @@ class PokemonServiceImplTest {
     @Test
     void searchAllPokemonSuccess() throws Exception {
         //when
-
         pokemonService.findAll();
         //then
         verify(repository).findAll();
@@ -106,6 +103,7 @@ class PokemonServiceImplTest {
         //given
         Pokemon pokemon = mockPokemon();
         //when
+        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(pokemon));
         pokemonService.update(pokemon);
         //then
         verify(repository).save(pokemon);

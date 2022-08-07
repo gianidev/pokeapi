@@ -1,8 +1,8 @@
 package com.gcruz.pokeapi.service.impl;
 
-import com.gcruz.pokeapi.entity.Artwork;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.ArtworkRepository;
+import com.gcruz.pokeapi.repository.model.Artwork;
 import com.gcruz.pokeapi.service.ArtworkService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,10 +19,10 @@ public class ArtworkServiceImpl implements ArtworkService {
     private ArtworkRepository repository;
 
     @Override
-    public Artwork create(Artwork artWork) throws Exception {
+    public Artwork create(Artwork artwork) throws Exception {
         try {
             log.info("Saving Artworks in database.");
-            return repository.save(artWork);
+            return repository.save(artwork);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -49,10 +49,11 @@ public class ArtworkServiceImpl implements ArtworkService {
     }
 
     @Override
-    public Artwork update(Artwork artWork) throws Exception {
+    public Artwork update(Artwork artwork) throws Exception {
         try {
-            log.info(String.format("Updating Artwork with Id %s .", artWork.getId()));
-            return repository.save(artWork);
+            log.info(String.format("Updating Artwork with Id %s .", artwork.getId()));
+            repository.save(artwork);
+            return findById(artwork.getId());
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -67,4 +68,5 @@ public class ArtworkServiceImpl implements ArtworkService {
             throw new Exception(e.getMessage());
         }
     }
+
 }

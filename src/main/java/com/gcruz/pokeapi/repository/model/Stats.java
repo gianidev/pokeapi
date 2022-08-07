@@ -1,5 +1,7 @@
-package com.gcruz.pokeapi.model;
+package com.gcruz.pokeapi.repository.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +11,8 @@ import javax.validation.constraints.NotNull;
 @Entity(name = "stats")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Stats {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,6 +1,6 @@
 package com.gcruz.pokeapi.service.impl;
 
-import com.gcruz.pokeapi.entity.Generation;
+import com.gcruz.pokeapi.repository.model.Generation;
 import com.gcruz.pokeapi.repository.GenerationRepository;
 import com.gcruz.pokeapi.service.GenerationService;
 import org.junit.jupiter.api.BeforeEach;
@@ -60,6 +60,7 @@ class GenerationServiceImplTest {
         //given
         Generation generation = mockGeneration();
         //when
+        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(generation));
         service.update(generation);
         //then
         verify(repository).save(generation);

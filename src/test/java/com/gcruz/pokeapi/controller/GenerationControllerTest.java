@@ -1,6 +1,6 @@
 package com.gcruz.pokeapi.controller;
 
-import com.gcruz.pokeapi.entity.Generation;
+import com.gcruz.pokeapi.repository.model.Generation;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.GenerationRepository;
 import com.gcruz.pokeapi.service.GenerationService;
@@ -76,6 +76,7 @@ class GenerationControllerTest {
     @Test
     void updateGenerationSuccess() throws Exception {
         //when
+        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockGeneration()));
         ResponseEntity<Generation> response = controller.update(mockGeneration());
         //then
         verify(repository).save(any());

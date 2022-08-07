@@ -1,6 +1,7 @@
 package com.gcruz.pokeapi.controller;
 
-import com.gcruz.pokeapi.entity.Stats;
+import com.gcruz.pokeapi.repository.model.Pokemon;
+import com.gcruz.pokeapi.repository.model.Stats;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.service.StatsService;
 import lombok.AllArgsConstructor;
@@ -33,10 +34,8 @@ public class StatsController {
     }
 
     @PutMapping
-    public ResponseEntity update(@RequestBody Stats stats) throws Exception {
-        service.update(stats);
-        return new ResponseEntity<>(HttpStatus.OK);
-
+    public ResponseEntity<Stats> update(@RequestBody Stats stats) throws Exception {
+        return new ResponseEntity<Stats>(service.update(stats), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

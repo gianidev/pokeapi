@@ -1,6 +1,6 @@
 package com.gcruz.pokeapi.service;
 
-import com.gcruz.pokeapi.entity.Stats;
+import com.gcruz.pokeapi.repository.model.Stats;
 import com.gcruz.pokeapi.exception.NotFoundException;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public interface StatsService {
 
     Stats findById(long id) throws NotFoundException;
 
-    void update(Stats stats) throws Exception;
+    Stats update(Stats stats) throws Exception;
 
     void deleteById(long id) throws Exception;
 }

@@ -1,6 +1,6 @@
 package com.gcruz.pokeapi.service.impl;
 
-import com.gcruz.pokeapi.entity.Stats;
+import com.gcruz.pokeapi.repository.model.Stats;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.StatsRepository;
 import com.gcruz.pokeapi.service.StatsService;
@@ -49,10 +49,11 @@ public class StatsServiceImpl implements StatsService {
 
 
     @Override
-    public void update(Stats stats) throws Exception {
+    public Stats update(Stats stats) throws Exception {
         try {
             log.info(String.format("Updating Stats with id %s .", stats.getId()));
             repository.save(stats);
+            return findById(stats.getId());
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

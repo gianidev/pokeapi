@@ -1,6 +1,6 @@
 package com.gcruz.pokeapi.controller;
 
-import com.gcruz.pokeapi.entity.Region;
+import com.gcruz.pokeapi.repository.model.Region;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.RegionRepository;
 import com.gcruz.pokeapi.service.RegionService;
@@ -76,6 +76,7 @@ class RegionControllerTest {
     @Test
     void updateRegionSuccess() throws Exception {
         //when
+        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockRegion()));
         ResponseEntity<Region> response = controller.update(mockRegion());
         //then
         verify(repository).save(any());
@@ -93,6 +94,6 @@ class RegionControllerTest {
     }
 
     Region mockRegion() {
-        return new Region(1L, "Kanto");
+        return Region.builder().id(1L).name("Kanto").build();
     }
 }

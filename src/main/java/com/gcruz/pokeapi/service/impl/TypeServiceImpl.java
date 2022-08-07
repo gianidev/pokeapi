@@ -1,6 +1,6 @@
 package com.gcruz.pokeapi.service.impl;
 
-import com.gcruz.pokeapi.entity.Type;
+import com.gcruz.pokeapi.repository.model.Type;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.TypeRepository;
 import com.gcruz.pokeapi.service.TypeService;
@@ -52,7 +52,8 @@ public class TypeServiceImpl implements TypeService {
     public Type update(Type type) throws Exception {
         try {
             log.info(String.format("Updating Type with id %s .", type.getId()));
-            return repository.save(type);
+            repository.save(type);
+            return findById(type.getId());
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
