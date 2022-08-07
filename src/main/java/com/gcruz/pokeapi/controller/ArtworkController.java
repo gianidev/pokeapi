@@ -45,6 +45,7 @@ public class ArtworkController {
 
     @PostMapping
     public ResponseEntity<ArtworkDTO> createArtwork(@RequestBody ArtworkDTO artworkDTO) throws Exception {
+
         Artwork artworkRequest = modelMapper.map(artworkDTO, Artwork.class);
         Artwork artwork = service.create(artworkRequest);
         ArtworkDTO artworkResponse = modelMapper.map(artwork, ArtworkDTO.class);
@@ -54,6 +55,7 @@ public class ArtworkController {
 
     @PutMapping
     public ResponseEntity<ArtworkDTO> updateArtwork(@RequestBody ArtworkDTO artworkDTO) throws Exception {
+
         Artwork artworkRequest = modelMapper.map(artworkDTO, Artwork.class);
         Artwork artwork = service.updateArtwork(artworkRequest);
         ArtworkDTO artworkResponse = modelMapper.map(artwork, ArtworkDTO.class);
@@ -62,6 +64,7 @@ public class ArtworkController {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity deleteArtwork(@PathVariable("id") Long id) throws Exception {
+
         service.deleteArtwork(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
