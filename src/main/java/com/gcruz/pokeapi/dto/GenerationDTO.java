@@ -1,2 +1,10 @@
-package com.gcruz.pokeapi.dto;public class GenerationDTO {
+package com.gcruz.pokeapi.dto;
+
+import lombok.Data;
+
+@Data
+public class GenerationDTO {
+    private Long id;
+    private String name;
+    private String region;
 }
