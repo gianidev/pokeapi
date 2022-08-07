@@ -34,7 +34,7 @@ class ArtworkServiceImplTest {
         //given
         Artwork artwork = mockArtwork();
         //when
-        service.create(artwork);
+        service.createArtwork(artwork);
         //then
         verify(repository).save(artwork);
     }

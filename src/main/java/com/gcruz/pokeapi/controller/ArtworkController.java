@@ -29,9 +29,9 @@ public class ArtworkController {
     private ResponseEntity<List<ArtworkDTO>> getAllArtworks() throws Exception {
 
         List<ArtworkDTO> artworkResponse = service.getAllArtworks()
-                                            .stream()
-                                            .map(artwork -> modelMapper.map(artwork, ArtworkDTO.class))
-                                            .collect(Collectors.toList());
+                .stream()
+                .map(artwork -> modelMapper.map(artwork, ArtworkDTO.class))
+                .collect(Collectors.toList());
         return ResponseEntity.ok().body(artworkResponse);
     }
 
@@ -47,7 +47,7 @@ public class ArtworkController {
     public ResponseEntity<ArtworkDTO> createArtwork(@RequestBody ArtworkDTO artworkDTO) throws Exception {
 
         Artwork artworkRequest = modelMapper.map(artworkDTO, Artwork.class);
-        Artwork artwork = service.create(artworkRequest);
+        Artwork artwork = service.createArtwork(artworkRequest);
         ArtworkDTO artworkResponse = modelMapper.map(artwork, ArtworkDTO.class);
 
         return new ResponseEntity<ArtworkDTO>(artworkResponse, HttpStatus.CREATED);

@@ -6,7 +6,7 @@ import com.gcruz.pokeapi.repository.model.Artwork;
 import java.util.List;
 
 public interface ArtworkService {
-    Artwork create(Artwork artwork) throws Exception;
+    Artwork createArtwork(Artwork artwork) throws Exception;
 
     List<Artwork> getAllArtworks() throws Exception;
 

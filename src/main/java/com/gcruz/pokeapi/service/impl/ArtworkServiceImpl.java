@@ -19,7 +19,7 @@ public class ArtworkServiceImpl implements ArtworkService {
     private ArtworkRepository repository;
 
     @Override
-    public Artwork create(Artwork artwork) throws Exception {
+    public Artwork createArtwork(Artwork artwork) throws Exception {
         try {
             log.info("Saving Artworks in database.");
             return repository.save(artwork);
