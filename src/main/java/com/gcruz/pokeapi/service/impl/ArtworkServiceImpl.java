@@ -30,7 +30,7 @@ public class ArtworkServiceImpl implements ArtworkService {
 
 
     @Override
-    public List<Artwork> findAll() throws Exception {
+    public List<Artwork> getAllArtworks() throws Exception {
         try {
             log.info("Fetching all Artworks.");
             return (List<Artwork>) repository.findAll();
@@ -40,7 +40,7 @@ public class ArtworkServiceImpl implements ArtworkService {
     }
 
     @Override
-    public Artwork findById(long id) throws NotFoundException {
+    public Artwork getArtworkById(long id) throws NotFoundException {
         Optional<Artwork> optional = repository.findById(id);
         if (optional.isPresent()) {
             log.info(String.format("Artwork with Id %s has been found.", id));
@@ -49,24 +49,32 @@ public class ArtworkServiceImpl implements ArtworkService {
     }
 
     @Override
-    public Artwork update(Artwork artwork) throws Exception {
+    public Artwork updateArtwork(Artwork artwork) throws Exception {
         try {
             log.info(String.format("Updating Artwork with Id %s .", artwork.getId()));
             repository.save(artwork);
-            return findById(artwork.getId());
+            return getArtworkById(artwork.getId());
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
     @Override
-    public void delete(long id) throws Exception {
+    public void deleteArtwork(long id) throws Exception {
         try {
             log.info(String.format("Deleting Artwork with Id %s.", id));
-            repository.deleteById(id);
+            if (!associatedToPokemon(id)) {
+                repository.deleteById(id);
+            } else {
+                throw new Exception("Artwork associated to Pokemon, can't be deleted");
+            }
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
+    private boolean associatedToPokemon(long id) throws NotFoundException {
+        Artwork artwork = getArtworkById(id);
+        return artwork.getPokemon() != null;
+    }
 }

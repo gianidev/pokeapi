@@ -43,7 +43,7 @@ class ArtworkServiceImplTest {
     void searchArtworkSuccess() throws Exception {
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockArtworkWithId(1L)));
-        Artwork artwork = service.findById(1L);
+        Artwork artwork = service.getArtworkById(1L);
         //then
         verify(repository).findById(1L);
         assertThat(artwork.getId()).isNotNull();
@@ -58,7 +58,7 @@ class ArtworkServiceImplTest {
         //when
         when(repository.findAll()).thenReturn(spritesList);
         //when
-        List<Artwork> results = service.findAll();
+        List<Artwork> results = service.getAllArtworks();
         //then
         verify(repository).findAll();
         assertThat(results.size()).isEqualTo(spritesList.size());
@@ -71,7 +71,7 @@ class ArtworkServiceImplTest {
         Artwork artwork = mockArtworkWithId(1L);
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(artwork));
-        service.update(artwork);
+        service.updateArtwork(artwork);
         //then
         verify(repository).save(artwork);
     }
@@ -79,7 +79,7 @@ class ArtworkServiceImplTest {
     @Test
     void deleteArtworkSuccess() throws Exception {
         //when
-        service.delete(1L);
+        service.deleteArtwork(1L);
         //then
         verify(repository).deleteById(1L);
     }

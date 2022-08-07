@@ -20,7 +20,6 @@ public class Artwork {
     @Column(name = "artwork_id")
     private long id;
     private String url;
-    @JsonBackReference
     @OneToOne(mappedBy = "artwork")
     private Pokemon pokemon;
 }

@@ -47,7 +47,6 @@ public class Pokemon implements Serializable {
             joinColumns = @JoinColumn(name = "pokemon_id"),
             inverseJoinColumns = @JoinColumn(name = "type_id"))
     private List<Type> types;
-    @JsonManagedReference
     @OneToOne
     @JoinColumn(name = "artwork_id")
     private Artwork artwork;

@@ -8,11 +8,11 @@ import java.util.List;
 public interface ArtworkService {
     Artwork create(Artwork artwork) throws Exception;
 
-    List<Artwork> findAll() throws Exception;
+    List<Artwork> getAllArtworks() throws Exception;
 
-    Artwork findById(long id) throws NotFoundException;
+    Artwork getArtworkById(long id) throws NotFoundException;
 
-    Artwork update(Artwork artwork) throws Exception;
+    Artwork updateArtwork(Artwork artwork) throws Exception;
 
-    void delete(long id) throws Exception;
+    void deleteArtwork(long id) throws Exception;
 }

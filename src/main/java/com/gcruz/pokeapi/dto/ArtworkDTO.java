@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ArtworkDTO {
-    private Long id;
+    private long id;
     private String url;
-    private Long pokemonId;
+    private long pokemonId;
 }

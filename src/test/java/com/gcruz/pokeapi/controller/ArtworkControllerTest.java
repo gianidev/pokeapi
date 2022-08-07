@@ -1,5 +1,6 @@
 package com.gcruz.pokeapi.controller;
 
+import com.gcruz.pokeapi.dto.ArtworkDTO;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.ArtworkRepository;
 import com.gcruz.pokeapi.repository.model.Artwork;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -32,19 +34,19 @@ class ArtworkControllerTest {
     @BeforeEach
     void setUp() {
         service = new ArtworkServiceImpl(repository);
-        controller = new ArtworkController(service);
+        controller = new ArtworkController(new ModelMapper(), service);
     }
 
     @Test
     void searchArtworkByIdSuccess() throws NotFoundException {
         //when
-        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockArtworkWithId(1L)));
-        ResponseEntity<Artwork> response = controller.findById(1L);
+        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockArtwork()));
+        ResponseEntity<ArtworkDTO> response = controller.getArtworkById(1L);
 
         //then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
-        Artwork artwork = response.getBody();
+        ArtworkDTO artwork = response.getBody();
         assertThat(artwork.getId()).isEqualTo(1L);
     }
 
@@ -57,7 +59,7 @@ class ArtworkControllerTest {
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(null));
 
         //then
-        Exception exception = assertThrows(NotFoundException.class, () -> controller.findById(1L));
+        Exception exception = assertThrows(NotFoundException.class, () -> controller.getArtworkById(1L));
 
         String actualMessage = exception.getMessage();
 
@@ -67,22 +69,22 @@ class ArtworkControllerTest {
     @Test
     void createArtworkSuccess() throws Exception {
         //when
-        when(repository.save(any())).thenReturn(mockArtworkWithId(1L));
-        ResponseEntity<Artwork> response = controller.create(mockArtwork());
+        when(repository.save(any())).thenReturn(mockArtwork());
+        ResponseEntity<ArtworkDTO> response = controller.createArtwork(mockArtworkDTO());
 
         //then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
-        Artwork artwork = response.getBody();
-        assertThat(artwork.getId()).isEqualTo(1L);
+        ArtworkDTO artworkDTO = response.getBody();
+        assertThat(artworkDTO.getId()).isEqualTo(1L);
     }
 
 
     @Test
     void updateArtworkSuccess() throws Exception {
         //when
-        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockArtworkWithId(1L)));
-        ResponseEntity<Artwork> response = controller.update(mockArtworkWithId(1L));
+        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockArtwork()));
+        ResponseEntity<ArtworkDTO> response = controller.updateArtwork(mockArtworkDTO());
 
         //then
         verify(repository).save(any());
@@ -94,9 +96,10 @@ class ArtworkControllerTest {
 
 
     @Test
-    void deleteArtworkSuccess() throws Exception {//when
+    void deleteArtworkSuccess() throws Exception {
         //when
-        ResponseEntity<Artwork> response = controller.delete(1L);
+        when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockArtwork()));
+        ResponseEntity<ArtworkDTO> response = controller.deleteArtwork(1L);
         //then
         verify(repository).deleteById(1L);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -105,13 +108,14 @@ class ArtworkControllerTest {
 
     Artwork mockArtwork() {
         Artwork artwork = new Artwork();
+        artwork.setId(1L);
         artwork.setUrl("dummy.url/pikachu-default");
         return artwork;
     }
 
-    Artwork mockArtworkWithId(long id) {
-        Artwork artwork = new Artwork();
-        artwork.setId(id);
+    ArtworkDTO mockArtworkDTO() {
+        ArtworkDTO artwork = new ArtworkDTO();
+        artwork.setId(1L);
         artwork.setUrl("dummy.url/pikachu-default");
         return artwork;
     }
