@@ -19,7 +19,7 @@ public class GenerationServiceImpl implements GenerationService {
     private final GenerationRepository repository;
     
     @Override
-    public Generation create(Generation generation) throws Exception {
+    public Generation createGeneration(Generation generation) throws Exception {
         try {
             log.info("Saving generation in database.");
             return repository.save(generation);
@@ -29,7 +29,7 @@ public class GenerationServiceImpl implements GenerationService {
     }
 
     @Override
-    public List<Generation> findAll() throws Exception {
+    public List<Generation> getAllGenerations() throws Exception {
         try {
             log.info("Fetching all generations.");
             return (List<Generation>) repository.findAll();
@@ -39,7 +39,7 @@ public class GenerationServiceImpl implements GenerationService {
     }
 
     @Override
-    public Generation findById(long id) throws NotFoundException {
+    public Generation getGenerationById(long id) throws NotFoundException {
         Optional<Generation> optional = repository.findById(id);
         if (optional.isPresent()) {
             log.info(String.format("Generation with id %s has been found.", id));
@@ -48,18 +48,18 @@ public class GenerationServiceImpl implements GenerationService {
     }
 
     @Override
-    public Generation update(Generation generation) throws Exception {
+    public Generation updateGeneration(Generation generation) throws Exception {
         try {
             log.info(String.format("Updating generation with id %s .", generation.getId()));
             repository.save(generation);
-            return findById(generation.getId());
+            return getGenerationById(generation.getId());
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
     @Override
-    public void deleteById(long id) throws Exception {
+    public void deleteGeneration(long id) throws Exception {
         try {
             log.info(String.format("Deleting generation with id %s.", id));
             repository.deleteById(id);

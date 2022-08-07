@@ -6,13 +6,13 @@ import com.gcruz.pokeapi.exception.NotFoundException;
 import java.util.List;
 
 public interface GenerationService {
-    Generation create(Generation generation) throws Exception;
+    Generation createGeneration(Generation generation) throws Exception;
 
-    List<Generation> findAll() throws Exception;
+    List<Generation> getAllGenerations() throws Exception;
 
-    Generation findById(long id) throws NotFoundException;
+    Generation getGenerationById(long id) throws NotFoundException;
 
-    Generation update(Generation generation) throws Exception;
+    Generation updateGeneration(Generation generation) throws Exception;
 
-    void deleteById(long id) throws Exception;
+    void deleteGeneration(long id) throws Exception;
 }

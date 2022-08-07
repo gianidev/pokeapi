@@ -6,5 +6,5 @@ import lombok.Data;
 public class GenerationDTO {
     private Long id;
     private String name;
-    private String region;
+    private Long regionId;
 }

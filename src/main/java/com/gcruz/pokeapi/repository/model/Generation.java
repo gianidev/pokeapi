@@ -25,8 +25,7 @@ public class Generation {
     private String name;
     @OneToOne
     @JoinColumn(name = "region_id")
-    private Region mainRegion;
-    @JsonManagedReference
+    private Region region;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "generation")
     private List<Pokemon> pokemonList;
 }

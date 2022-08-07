@@ -28,7 +28,6 @@ public class Pokemon implements Serializable {
     private String name;
     private int height;
     private int weight;
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "generation_id")
     private Generation generation;

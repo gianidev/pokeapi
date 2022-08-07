@@ -31,7 +31,7 @@ class GenerationServiceImplTest {
         //given
         Generation generation = mockGeneration();
         //when
-        service.create(generation);
+        service.createGeneration(generation);
         //then
         verify(repository).save(generation);
     }
@@ -41,7 +41,7 @@ class GenerationServiceImplTest {
     void searchGenerationByIdSuccess() throws Exception {
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockGeneration()));
-        Generation generation = service.findById(1L);
+        Generation generation = service.getGenerationById(1L);
         //then
         verify(repository).findById(1L);
         assertThat(generation.getId()).isEqualTo(1L);
@@ -50,7 +50,7 @@ class GenerationServiceImplTest {
     @Test
     void searchAllGenerationSuccess() throws Exception {
         //when
-        service.findAll();
+        service.getAllGenerations();
         //then
         verify(repository).findAll();
     }
@@ -61,7 +61,7 @@ class GenerationServiceImplTest {
         Generation generation = mockGeneration();
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(generation));
-        service.update(generation);
+        service.updateGeneration(generation);
         //then
         verify(repository).save(generation);
     }
@@ -69,7 +69,7 @@ class GenerationServiceImplTest {
     @Test
     void deleteGenerationSuccess() throws Exception {
         //when
-        service.deleteById(1L);
+        service.deleteGeneration(1L);
         //then
         verify(repository).deleteById(1L);
     }
