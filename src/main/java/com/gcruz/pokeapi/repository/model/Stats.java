@@ -1,4 +1,4 @@
-package com.gcruz.pokeapi.entity;
+package com.gcruz.pokeapi.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

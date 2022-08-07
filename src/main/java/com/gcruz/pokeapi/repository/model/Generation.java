@@ -1,4 +1,4 @@
-package com.gcruz.pokeapi.entity;
+package com.gcruz.pokeapi.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
