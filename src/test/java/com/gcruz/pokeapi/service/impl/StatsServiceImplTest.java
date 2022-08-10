@@ -31,7 +31,7 @@ class StatsServiceImplTest {
         //given
         Stats stats = mockStats();
         //when
-        service.create(stats);
+        service.createStats(stats);
         //then
         verify(repository).save(stats);
     }
@@ -41,7 +41,7 @@ class StatsServiceImplTest {
     void seachStatsByIdSuccess() throws Exception {
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockStats()));
-        Stats stats = service.findById(1L);
+        Stats stats = service.getStatsById(1L);
         //then
         verify(repository).findById(1L);
         assertThat(stats.getId()).isEqualTo(1L);
@@ -50,7 +50,7 @@ class StatsServiceImplTest {
     @Test
     void searchAllStatsSuccess() throws Exception {
         //when
-        service.findAll();
+        service.getAllStats();
         //then
         verify(repository).findAll();
     }
@@ -61,7 +61,7 @@ class StatsServiceImplTest {
         Stats stats = mockStats();
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(stats));
-        service.update(stats);
+        service.updateStats(stats);
         //then
         verify(repository).save(stats);
     }
@@ -69,7 +69,7 @@ class StatsServiceImplTest {
     @Test
     void deleteStatsByIdSuccess() throws Exception {
         //when
-        service.deleteById(1L);
+        service.deleteStats(1L);
         //then
         verify(repository).deleteById(1L);
     }

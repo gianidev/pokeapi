@@ -31,7 +31,7 @@ class TypeServiceImplTest {
         //given
         Type type = mockType();
         //when
-        service.create(type);
+        service.createType(type);
         //then
         verify(repository).save(type);
     }
@@ -41,7 +41,7 @@ class TypeServiceImplTest {
     void seachTypeByIdSuccess() throws Exception {
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockType()));
-        Type type = service.findById(1L);
+        Type type = service.getTypeById(1L);
         //then
         verify(repository).findById(1L);
         assertThat(type.getId()).isEqualTo(1L);
@@ -50,7 +50,7 @@ class TypeServiceImplTest {
     @Test
     void searchAllTypeSuccess() throws Exception {
         //when
-        service.findAll();
+        service.getAllTypes();
         //then
         verify(repository).findAll();
     }
@@ -61,7 +61,7 @@ class TypeServiceImplTest {
         Type type = mockType();
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(type));
-        service.update(type);
+        service.updateType(type);
         //then
         verify(repository).save(type);
     }
@@ -69,7 +69,7 @@ class TypeServiceImplTest {
     @Test
     void deleteTypeByIdSuccess() throws Exception {
         //when
-        service.delete(1L);
+        service.deleteType(1L);
         //then
         verify(repository).deleteById(1L);
     }

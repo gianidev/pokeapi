@@ -6,13 +6,13 @@ import com.gcruz.pokeapi.exception.NotFoundException;
 import java.util.List;
 
 public interface TypeService {
-    Type create(Type stats) throws Exception;
+    Type createType(Type stats) throws Exception;
 
-    List<Type> findAll() throws Exception;
+    List<Type> getAllTypes() throws Exception;
 
-    Type findById(long id) throws NotFoundException;
+    Type getTypeById(long id) throws NotFoundException;
 
-    Type update(Type stats) throws Exception;
+    Type updateType(Type stats) throws Exception;
 
-    void delete(long id) throws Exception;
+    void deleteType(long id) throws Exception;
 }

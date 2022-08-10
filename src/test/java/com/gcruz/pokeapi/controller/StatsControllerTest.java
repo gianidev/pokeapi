@@ -1,8 +1,9 @@
 package com.gcruz.pokeapi.controller;
 
-import com.gcruz.pokeapi.repository.model.Stats;
+import com.gcruz.pokeapi.dto.StatsDTO;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.StatsRepository;
+import com.gcruz.pokeapi.repository.model.Stats;
 import com.gcruz.pokeapi.service.StatsService;
 import com.gcruz.pokeapi.service.impl.StatsServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -31,18 +33,18 @@ class StatsControllerTest {
     @BeforeEach
     void setUp() {
         service = new StatsServiceImpl(repository);
-        controller = new StatsController(service);
+        controller = new StatsController(new ModelMapper(), service);
     }
 
     @Test
     void searchStatsByIdSuccess() throws NotFoundException {
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockStats()));
-        ResponseEntity<Stats> response = controller.findById(1L);
+        ResponseEntity<StatsDTO> response = controller.getStatsByStats(1L);
         //then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
-        Stats stats = response.getBody();
+        StatsDTO stats = response.getBody();
 
         assertThat(stats.getId()).isEqualTo(1L);
     }
@@ -54,7 +56,7 @@ class StatsControllerTest {
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(null));
         //then
-        Exception exception = assertThrows(NotFoundException.class, () -> controller.findById(1L));
+        Exception exception = assertThrows(NotFoundException.class, () -> controller.getStatsByStats(1L));
         String actualMessage = exception.getMessage();
         assertThat(actualMessage).isEqualTo(expectedMessage);
     }
@@ -63,11 +65,11 @@ class StatsControllerTest {
     void createStatsSuccess() throws Exception {
         //when
         when(repository.save(any())).thenReturn(mockStats());
-        ResponseEntity<Stats> response = controller.create(mockStats());
+        ResponseEntity<StatsDTO> response = controller.createStats(mockStatsDTO());
         //then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
-        Stats stats = response.getBody();
+        StatsDTO stats = response.getBody();
 
         assertThat(stats.getId()).isEqualTo(1L);
     }
@@ -77,7 +79,7 @@ class StatsControllerTest {
     void updateStatsSuccess() throws Exception {
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockStats()));
-        ResponseEntity<Stats> response = controller.update(mockStats());
+        ResponseEntity<StatsDTO> response = controller.updateStats(mockStatsDTO());
         //then
         verify(repository).save(any());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -87,7 +89,7 @@ class StatsControllerTest {
     @Test
     void deleteStatsSuccess() throws Exception {//when
         //when
-        ResponseEntity<Stats> response = controller.delete(1L);
+        ResponseEntity<Stats> response = controller.deleteStats(1L);
         //then
         verify(repository).deleteById(1L);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -95,6 +97,15 @@ class StatsControllerTest {
 
     Stats mockStats() {
         Stats stats = new Stats();
+        stats.setId(1L);
+        stats.setAttack(10);
+        stats.setDefense(5);
+        stats.setHealthPoints(100);
+        return stats;
+    }
+
+    StatsDTO mockStatsDTO() {
+        StatsDTO stats = new StatsDTO();
         stats.setId(1L);
         stats.setAttack(10);
         stats.setDefense(5);

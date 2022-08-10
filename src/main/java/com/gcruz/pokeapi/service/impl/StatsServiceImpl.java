@@ -19,7 +19,7 @@ public class StatsServiceImpl implements StatsService {
     private final StatsRepository repository;
 
     @Override
-    public Stats create(Stats stats) throws Exception {
+    public Stats createStats(Stats stats) throws Exception {
         try {
             log.info("Saving Stats in database.");
             return repository.save(stats);
@@ -29,7 +29,7 @@ public class StatsServiceImpl implements StatsService {
     }
 
     @Override
-    public List<Stats> findAll() throws Exception {
+    public List<Stats> getAllStats() throws Exception {
         try {
             log.info("Fetching all Stats.");
             return (List<Stats>) repository.findAll();
@@ -39,7 +39,7 @@ public class StatsServiceImpl implements StatsService {
     }
 
     @Override
-    public Stats findById(long id) throws NotFoundException {
+    public Stats getStatsById(long id) throws NotFoundException {
         Optional<Stats> optional = repository.findById(id);
         if (optional.isPresent()) {
             log.info(String.format("Stats with id %s has been found.", id));
@@ -49,18 +49,18 @@ public class StatsServiceImpl implements StatsService {
 
 
     @Override
-    public Stats update(Stats stats) throws Exception {
+    public Stats updateStats(Stats stats) throws Exception {
         try {
             log.info(String.format("Updating Stats with id %s .", stats.getId()));
             repository.save(stats);
-            return findById(stats.getId());
+            return getStatsById(stats.getId());
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
     @Override
-    public void deleteById(long id) throws Exception {
+    public void deleteStats(long id) throws Exception {
         try {
             log.info(String.format("Deleting Stats with id %s.", id));
             repository.deleteById(id);

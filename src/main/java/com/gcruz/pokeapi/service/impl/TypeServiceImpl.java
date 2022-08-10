@@ -19,7 +19,7 @@ public class TypeServiceImpl implements TypeService {
     private final TypeRepository repository;
 
     @Override
-    public Type create(Type type) throws Exception {
+    public Type createType(Type type) throws Exception {
         try {
             log.info("Saving Type in database.");
             return repository.save(type);
@@ -29,7 +29,7 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
-    public List<Type> findAll() throws Exception {
+    public List<Type> getAllTypes() throws Exception {
         try {
             log.info("Fetching all Type.");
             return (List<Type>) repository.findAll();
@@ -39,7 +39,7 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
-    public Type findById(long id) throws NotFoundException {
+    public Type getTypeById(long id) throws NotFoundException {
         Optional<Type> optional = repository.findById(id);
         if (optional.isPresent()) {
             log.info(String.format("Type with id %s has been found.", id));
@@ -49,18 +49,18 @@ public class TypeServiceImpl implements TypeService {
 
 
     @Override
-    public Type update(Type type) throws Exception {
+    public Type updateType(Type type) throws Exception {
         try {
             log.info(String.format("Updating Type with id %s .", type.getId()));
             repository.save(type);
-            return findById(type.getId());
+            return getTypeById(type.getId());
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
     @Override
-    public void delete(long id) throws Exception {
+    public void deleteType(long id) throws Exception {
         try {
             log.info(String.format("Deleting Type with id %s.", id));
             repository.deleteById(id);
