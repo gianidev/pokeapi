@@ -1,8 +1,10 @@
 package com.gcruz.pokeapi.controller;
 
-import com.gcruz.pokeapi.repository.model.Region;
+import com.gcruz.pokeapi.dto.ArtworkDTO;
+import com.gcruz.pokeapi.dto.RegionDTO;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.RegionRepository;
+import com.gcruz.pokeapi.repository.model.Region;
 import com.gcruz.pokeapi.service.RegionService;
 import com.gcruz.pokeapi.service.impl.RegionServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -31,18 +34,18 @@ class RegionControllerTest {
     @BeforeEach
     void setUp() {
         service = new RegionServiceImpl(repository);
-        controller = new RegionController(service);
+        controller = new RegionController(new ModelMapper(), service);
     }
 
     @Test
     void searchRegionByIdSuccess() throws NotFoundException {
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockRegion()));
-        ResponseEntity<Region> response = controller.findById(1L);
+        ResponseEntity<RegionDTO> response = controller.findById(1L);
         //then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
-        Region region = response.getBody();
+        RegionDTO region = response.getBody();
 
         assertThat(region.getId()).isEqualTo(1L);
     }
@@ -63,11 +66,11 @@ class RegionControllerTest {
     void createRegionSuccess() throws Exception {
         //when
         when(repository.save(any())).thenReturn(mockRegion());
-        ResponseEntity<Region> response = controller.create(mockRegion());
+        ResponseEntity<RegionDTO> response = controller.create(mockRegionDTO());
         //then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
-        Region region = response.getBody();
+        RegionDTO region = response.getBody();
 
         assertThat(region.getId()).isEqualTo(1L);
     }
@@ -77,7 +80,7 @@ class RegionControllerTest {
     void updateRegionSuccess() throws Exception {
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockRegion()));
-        ResponseEntity<Region> response = controller.update(mockRegion());
+        ResponseEntity<RegionDTO> response = controller.update(mockRegionDTO());
         //then
         verify(repository).save(any());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -95,5 +98,12 @@ class RegionControllerTest {
 
     Region mockRegion() {
         return Region.builder().id(1L).name("Kanto").build();
+    }
+
+    RegionDTO mockRegionDTO() {
+        RegionDTO dto = new RegionDTO();
+        dto.setId(1L);
+        dto.setName("Kanto");
+        return dto;
     }
 }

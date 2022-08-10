@@ -19,7 +19,7 @@ public class RegionServiceImpl implements RegionService {
     private final RegionRepository repository;
 
     @Override
-    public Region create(Region region) throws Exception {
+    public Region createRegion(Region region) throws Exception {
         try {
             log.info("Saving Region in DB.");
             return repository.save(region);
@@ -29,7 +29,7 @@ public class RegionServiceImpl implements RegionService {
     }
 
     @Override
-    public List<Region> findAll() throws Exception {
+    public List<Region> getAllRegions() throws Exception {
         try {
             log.info("Fetching all Regions.");
             return (List<Region>) repository.findAll();
@@ -40,7 +40,7 @@ public class RegionServiceImpl implements RegionService {
     }
 
     @Override
-    public Region findById(long id) throws NotFoundException {
+    public Region getRegionById(long id) throws NotFoundException {
         Optional<Region> optional = repository.findById(id);
         if (optional.isPresent()) {
             log.info(String.format("Region with id %s has been found.", id));
@@ -49,18 +49,18 @@ public class RegionServiceImpl implements RegionService {
     }
 
     @Override
-    public Region update(Region region) throws Exception {
+    public Region updateRegion(Region region) throws Exception {
         try {
             log.info(String.format("Updating Region with id %s .", region.getId()));
             repository.save(region);
-            return findById(region.getId());
+            return getRegionById(region.getId());
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
     @Override
-    public void delete(long id) throws Exception {
+    public void deleteRegion(long id) throws Exception {
         try {
             log.info(String.format("Deleting Region with id %s.", id));
             repository.deleteById(id);

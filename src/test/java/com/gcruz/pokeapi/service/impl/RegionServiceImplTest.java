@@ -31,7 +31,7 @@ class RegionServiceImplTest {
         //given
         Region region = Region.builder().id(1L).name("Kanto").build();
         //when
-        service.create(region);
+        service.createRegion(region);
         //then
         verify(repository).save(region);
     }
@@ -41,7 +41,7 @@ class RegionServiceImplTest {
     void searchRegionByIdSuccess() throws Exception {
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(Region.builder().id(1L).name("Kanto").build()));
-        Region region = service.findById(1L);
+        Region region = service.getRegionById(1L);
         //then
         verify(repository).findById(1L);
         assertThat(region.getId()).isEqualTo(1L);
@@ -50,7 +50,7 @@ class RegionServiceImplTest {
     @Test
     void searchAllRegionSuccess() throws Exception {
         //when
-        service.findAll();
+        service.getAllRegions();
         //then
         verify(repository).findAll();
     }
@@ -61,7 +61,7 @@ class RegionServiceImplTest {
         Region region = Region.builder().id(1L).name("Kanto").build();
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(region));
-        service.update(region);
+        service.updateRegion(region);
         //then
         verify(repository).save(region);
     }
@@ -69,7 +69,7 @@ class RegionServiceImplTest {
     @Test
     void deleteRegionByIdSuccess() throws Exception {
         //when
-        service.delete(1L);
+        service.deleteRegion(1L);
         //then
         verify(repository).deleteById(1L);
     }
