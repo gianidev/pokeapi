@@ -19,7 +19,7 @@ public class PokemonServiceImpl implements PokemonService {
     private final PokemonRepository repository;
 
     @Override
-    public Pokemon create(Pokemon pokemon) throws Exception {
+    public Pokemon createPokemon(Pokemon pokemon) throws Exception {
         try {
             verifyValues(pokemon);
             log.info("Saving pokemon in database.");
@@ -30,7 +30,7 @@ public class PokemonServiceImpl implements PokemonService {
     }
 
     @Override
-    public List<Pokemon> findAll() throws Exception {
+    public List<Pokemon> getAllPokemon() throws Exception {
         try {
             log.info("Fetching all Pokemon.");
             return (List<Pokemon>) repository.findAll();
@@ -40,7 +40,7 @@ public class PokemonServiceImpl implements PokemonService {
     }
 
     @Override
-    public Pokemon findById(long id) throws NotFoundException {
+    public Pokemon getPokemonById(long id) throws NotFoundException {
         Optional<Pokemon> optional = repository.findById(id);
         if (optional.isPresent()) {
             log.info(String.format("Pokemon with id %s has been found.", id));
@@ -49,7 +49,7 @@ public class PokemonServiceImpl implements PokemonService {
     }
 
     @Override
-    public Pokemon findByName(String name) throws NotFoundException {
+    public Pokemon getPokemonByName(String name) throws NotFoundException {
         Optional<Pokemon> optional = repository.findByName(name);
         if (optional.isPresent()) {
             log.info(String.format("Pokemon with name %s has been found.", name));
@@ -58,19 +58,19 @@ public class PokemonServiceImpl implements PokemonService {
     }
 
     @Override
-    public Pokemon update(Pokemon pokemon) throws Exception {
+    public Pokemon updatePokemon(Pokemon pokemon) throws Exception {
         try {
             verifyValues(pokemon);
             log.info(String.format("Updating Pokemon with id %s .", pokemon.getId()));
             repository.save(pokemon);
-            return findById(pokemon.getId());
+            return getPokemonById(pokemon.getId());
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
     @Override
-    public void deleteById(long id) throws Exception {
+    public void deletePokemon(long id) throws Exception {
         try {
             log.info(String.format("Deleting Pokemon with id %s.", id));
 

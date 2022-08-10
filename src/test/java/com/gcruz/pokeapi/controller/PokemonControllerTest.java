@@ -1,5 +1,6 @@
 package com.gcruz.pokeapi.controller;
 
+import com.gcruz.pokeapi.dto.PokemonDTO;
 import com.gcruz.pokeapi.repository.model.Generation;
 import com.gcruz.pokeapi.repository.model.Pokemon;
 import com.gcruz.pokeapi.repository.model.Stats;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -34,18 +36,18 @@ class PokemonControllerTest {
     @BeforeEach
     void setUp() {
         service = new PokemonServiceImpl(repository);
-        controller = new PokemonController(service);
+        controller = new PokemonController(new ModelMapper(), service);
     }
 
     @Test
     void searchPokemonByIdSuccess() throws NotFoundException {
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockPokemon()));
-        ResponseEntity<Pokemon> response = controller.findById(1L);
+        ResponseEntity<PokemonDTO> response = controller.getPokemonById(1L);
         //then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 
-        Pokemon pokemon = response.getBody();
+        PokemonDTO pokemon = response.getBody();
 
         assertThat(pokemon.getId()).isEqualTo(1L);
     }
@@ -57,7 +59,7 @@ class PokemonControllerTest {
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(null));
         //then
-        Exception exception = assertThrows(NotFoundException.class, () -> controller.findById(1L));
+        Exception exception = assertThrows(NotFoundException.class, () -> controller.getPokemonById(1L));
         String actualMessage = exception.getMessage();
         assertThat(actualMessage).isEqualTo(expectedMessage);
     }
@@ -66,11 +68,11 @@ class PokemonControllerTest {
     void createPokemonSuccess() throws Exception {
         //when
         when(repository.save(any())).thenReturn(mockPokemon());
-        ResponseEntity<Pokemon> response = controller.create(mockPokemon());
+        ResponseEntity<PokemonDTO> response = controller.createPokemon(mockPokemon());
         //then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 
-        Pokemon pokemon = response.getBody();
+        PokemonDTO pokemon = response.getBody();
 
         assertThat(pokemon.getId()).isEqualTo(1L);
     }
@@ -80,7 +82,7 @@ class PokemonControllerTest {
     void updatePokemonSuccess() throws Exception {
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockPokemon()));
-        ResponseEntity<Pokemon> response = controller.update(mockPokemon());
+        ResponseEntity<PokemonDTO> response = controller.updatePokemon(mockPokemon());
         //then
         verify(repository).save(any());
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -90,7 +92,7 @@ class PokemonControllerTest {
     @Test
     void deletePokemonSuccess() throws Exception {//when
         //when
-        ResponseEntity<Pokemon> response = controller.delete(1L);
+        ResponseEntity<Pokemon> response = controller.deletePokemon(1L);
         //then
         verify(repository).deleteById(1L);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

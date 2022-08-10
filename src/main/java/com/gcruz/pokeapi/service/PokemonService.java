@@ -1,22 +1,20 @@
 package com.gcruz.pokeapi.service;
 
-import com.gcruz.pokeapi.repository.model.Pokemon;
 import com.gcruz.pokeapi.exception.NotFoundException;
+import com.gcruz.pokeapi.repository.model.Pokemon;
 
 import java.util.List;
 
 public interface PokemonService {
-    Pokemon create(Pokemon pokemon) throws Exception;
+    Pokemon createPokemon(Pokemon pokemon) throws Exception;
 
-    List<Pokemon> findAll() throws Exception;
+    List<Pokemon> getAllPokemon() throws Exception;
 
-    Pokemon findById(long id) throws NotFoundException;
+    Pokemon getPokemonById(long id) throws NotFoundException;
 
-    Pokemon findByName(String name) throws NotFoundException;
+    Pokemon getPokemonByName(String name) throws NotFoundException;
 
-    Pokemon update(Pokemon pokemon) throws Exception;
+    Pokemon updatePokemon(Pokemon pokemon) throws Exception;
 
-    void deleteById(long id) throws Exception;
-
-
+    void deletePokemon(long id) throws Exception;
 }

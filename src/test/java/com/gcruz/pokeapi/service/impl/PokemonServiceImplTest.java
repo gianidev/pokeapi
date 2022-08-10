@@ -39,7 +39,7 @@ class PokemonServiceImplTest {
         //given
         Pokemon pokemon = mockPokemon();
         //when
-        pokemonService.create(pokemon);
+        pokemonService.createPokemon(pokemon);
         //then
         verify(repository).save(pokemon);
     }
@@ -52,7 +52,7 @@ class PokemonServiceImplTest {
         pokemon.setGeneration(null);
         pokemon.setStats(null);
         //then
-        Exception exception = assertThrows(Exception.class, () -> pokemonService.create(pokemon));
+        Exception exception = assertThrows(Exception.class, () -> pokemonService.createPokemon(pokemon));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
@@ -61,7 +61,7 @@ class PokemonServiceImplTest {
     void searchPokemonByIdSuccess() throws Exception {
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(mockPokemon()));
-        Pokemon pokemon = pokemonService.findById(1L);
+        Pokemon pokemon = pokemonService.getPokemonById(1L);
         //then
         verify(repository).findById(1L);
         assertThat(pokemon.getId()).isEqualTo(1L);
@@ -70,7 +70,7 @@ class PokemonServiceImplTest {
     @Test
     void searchAllPokemonSuccess() throws Exception {
         //when
-        pokemonService.findAll();
+        pokemonService.getAllPokemon();
         //then
         verify(repository).findAll();
     }
@@ -80,7 +80,7 @@ class PokemonServiceImplTest {
     void searchPokemonByNameSuccess() throws NotFoundException {
         //when
         when(repository.findByName(anyString())).thenReturn(java.util.Optional.ofNullable(mockPokemon()));
-        Pokemon result = pokemonService.findByName("Pikachu");
+        Pokemon result = pokemonService.getPokemonByName("Pikachu");
         //then
         verify(repository).findByName("Pikachu");
         assertThat(result).isNotNull();
@@ -93,7 +93,7 @@ class PokemonServiceImplTest {
         //when
         when(repository.findByName(anyString())).thenReturn(Optional.empty());
         //then
-        Exception exception = assertThrows(NotFoundException.class, () -> pokemonService.findByName("Pikachu"));
+        Exception exception = assertThrows(NotFoundException.class, () -> pokemonService.getPokemonByName("Pikachu"));
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
@@ -104,7 +104,7 @@ class PokemonServiceImplTest {
         Pokemon pokemon = mockPokemon();
         //when
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(pokemon));
-        pokemonService.update(pokemon);
+        pokemonService.updatePokemon(pokemon);
         //then
         verify(repository).save(pokemon);
     }
@@ -112,7 +112,7 @@ class PokemonServiceImplTest {
     @Test
     void deletePokemonSuccess() throws Exception {
         //when
-        pokemonService.deleteById(1L);
+        pokemonService.deletePokemon(1L);
         //then
         verify(repository).deleteById(1L);
     }
