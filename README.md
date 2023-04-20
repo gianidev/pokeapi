@@ -1,6 +1,6 @@
 # PokéAPI
-
-<img src="https://img.pokemondb.net/sprites/home/normal/pikachu-original-cap.png" align="right" />
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white) ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white) ![PostgreSQL Badge](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=fff&style=for-the-badge) ![Docker Badge](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff&style=for-the-badge)
+<img src="https://img.pokemondb.net/sprites/home/normal/pikachu-original-cap.png" align="right" /> ![Gradle Badge](https://img.shields.io/badge/Gradle-02303A?logo=gradle&logoColor=fff&style=for-the-badge) ![Postman Badge](https://img.shields.io/badge/Postman-FF6C37?logo=postman&logoColor=fff&style=for-the-badge) 
 
 This API has been created to create and fetch Pokémon data, like a Pokedéx. 
 
