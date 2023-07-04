@@ -64,18 +64,8 @@ public class ArtworkServiceImpl implements ArtworkService {
     }
 
     @Override
-    public void deleteArtwork(long id) throws Exception {
+    public void deleteArtwork(long id) {
         log.info(String.format("Deleting Artwork with Id %s.", id));
-        removeArtworkReferences(id);
         repository.deleteById(id);
-    }
-
-    private void removeArtworkReferences(long id) throws Exception {
-        Artwork artwork = getArtworkById(id);
-        if (Objects.nonNull(artwork.getPokemon())) {
-            Pokemon pokemon = artwork.getPokemon();
-            pokemon.setArtwork(null);
-            pokemonService.updatePokemon(pokemon);
-        }
     }
 }

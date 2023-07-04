@@ -1,8 +1,6 @@
 package com.gcruz.pokeapi.repository.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,7 +29,6 @@ public class Pokemon implements Serializable {
     @ManyToOne
     @JoinColumn(name = "generation_id")
     private Generation generation;
-    @JsonIgnoreProperties("pokemon")
     @OneToOne
     @JoinColumn(name = "stats_id", unique = true)
     private Stats stats;
@@ -39,7 +36,6 @@ public class Pokemon implements Serializable {
     @ManyToOne
     @JoinColumn(name = "region_id")
     private Region region;
-    @JsonIgnoreProperties("pokemonList")
     @ManyToMany
     @JoinTable(
             name = "pokemon_type",

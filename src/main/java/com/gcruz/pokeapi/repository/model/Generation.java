@@ -1,6 +1,5 @@
 package com.gcruz.pokeapi.repository.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Entity
 @Table(name = "generations")
@@ -26,6 +24,4 @@ public class Generation {
     @OneToOne
     @JoinColumn(name = "region_id")
     private Region region;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "generation")
-    private List<Pokemon> pokemonList;
 }

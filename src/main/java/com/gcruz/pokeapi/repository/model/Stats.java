@@ -32,6 +32,4 @@ public class Stats {
     private int speed;
     @NotNull
     private int total;
-    @OneToOne(mappedBy = "stats")
-    private Pokemon pokemon;
 }

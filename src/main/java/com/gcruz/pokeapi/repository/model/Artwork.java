@@ -20,6 +20,4 @@ public class Artwork {
     @Column(name = "artwork_id")
     private long id;
     private String url;
-    @OneToOne(mappedBy = "artwork")
-    private Pokemon pokemon;
 }
