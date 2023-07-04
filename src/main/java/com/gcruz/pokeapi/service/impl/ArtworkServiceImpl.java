@@ -3,12 +3,15 @@ package com.gcruz.pokeapi.service.impl;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.ArtworkRepository;
 import com.gcruz.pokeapi.repository.model.Artwork;
+import com.gcruz.pokeapi.repository.model.Pokemon;
 import com.gcruz.pokeapi.service.ArtworkService;
+import com.gcruz.pokeapi.service.PokemonService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -17,6 +20,7 @@ import java.util.Optional;
 public class ArtworkServiceImpl implements ArtworkService {
 
     private ArtworkRepository repository;
+    private PokemonService pokemonService;
 
     @Override
     public Artwork createArtwork(Artwork artwork) throws Exception {
@@ -61,20 +65,17 @@ public class ArtworkServiceImpl implements ArtworkService {
 
     @Override
     public void deleteArtwork(long id) throws Exception {
-        try {
-            log.info(String.format("Deleting Artwork with Id %s.", id));
-            if (!associatedToPokemon(id)) {
-                repository.deleteById(id);
-            } else {
-                throw new Exception("Artwork associated to Pokemon, can't be deleted");
-            }
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+        log.info(String.format("Deleting Artwork with Id %s.", id));
+        removeArtworkReferences(id);
+        repository.deleteById(id);
     }
 
-    private boolean associatedToPokemon(long id) throws NotFoundException {
+    private void removeArtworkReferences(long id) throws Exception {
         Artwork artwork = getArtworkById(id);
-        return artwork.getPokemon() != null;
+        if (Objects.nonNull(artwork.getPokemon())) {
+            Pokemon pokemon = artwork.getPokemon();
+            pokemon.setArtwork(null);
+            pokemonService.updatePokemon(pokemon);
+        }
     }
 }

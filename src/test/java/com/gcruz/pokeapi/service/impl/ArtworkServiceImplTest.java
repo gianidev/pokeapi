@@ -3,6 +3,7 @@ package com.gcruz.pokeapi.service.impl;
 import com.gcruz.pokeapi.repository.ArtworkRepository;
 import com.gcruz.pokeapi.repository.model.Artwork;
 import com.gcruz.pokeapi.service.ArtworkService;
+import com.gcruz.pokeapi.service.PokemonService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -22,11 +24,13 @@ class ArtworkServiceImplTest {
 
     @Mock
     private ArtworkRepository repository;
+    @Mock
+    private PokemonService pokemonService;
     private ArtworkService service;
 
     @BeforeEach
     void setUp() {
-        service = new ArtworkServiceImpl(repository);
+        service = new ArtworkServiceImpl(repository,pokemonService);
     }
 
     @Test
@@ -79,8 +83,9 @@ class ArtworkServiceImplTest {
     @Test
     void deleteArtworkSuccess() throws Exception {
         //when
+        when(repository.findById(1L)).thenReturn(Optional.of(mockArtworkWithId(1L)));
         service.deleteArtwork(1L);
-        //then
+        //assert
         verify(repository).deleteById(1L);
     }
 

@@ -5,6 +5,7 @@ import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.ArtworkRepository;
 import com.gcruz.pokeapi.repository.model.Artwork;
 import com.gcruz.pokeapi.service.ArtworkService;
+import com.gcruz.pokeapi.service.PokemonService;
 import com.gcruz.pokeapi.service.impl.ArtworkServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,12 +29,14 @@ class ArtworkControllerTest {
     @Mock
     private ArtworkService service;
     @Mock
+    private PokemonService pokemonService;
+    @Mock
     private ArtworkRepository repository;
     private ArtworkController controller;
 
     @BeforeEach
     void setUp() {
-        service = new ArtworkServiceImpl(repository);
+        service = new ArtworkServiceImpl(repository, pokemonService);
         controller = new ArtworkController(new ModelMapper(), service);
     }
 
