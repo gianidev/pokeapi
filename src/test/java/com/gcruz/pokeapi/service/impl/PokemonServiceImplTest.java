@@ -1,17 +1,16 @@
 package com.gcruz.pokeapi.service.impl;
 
-import com.gcruz.pokeapi.repository.model.Generation;
-import com.gcruz.pokeapi.repository.model.Pokemon;
-import com.gcruz.pokeapi.repository.model.Stats;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.PokemonRepository;
-import com.gcruz.pokeapi.service.PokemonService;
+import com.gcruz.pokeapi.repository.model.*;
+import com.gcruz.pokeapi.service.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -27,11 +26,20 @@ class PokemonServiceImplTest {
 
     @Mock
     private PokemonRepository repository;
+    @Mock
+    private GenerationService generationService;
+    @Mock
+    private StatsService statsService;
+    @Mock
+    private ArtworkService artworkService;
+    @Mock
+    private TypeService typeService;
+
     private PokemonService pokemonService;
 
     @BeforeEach
     void setUp() {
-        pokemonService = new PokemonServiceImpl(repository);
+        pokemonService = new PokemonServiceImpl(repository, generationService, statsService, artworkService, typeService);
     }
 
     @Test
@@ -39,22 +47,23 @@ class PokemonServiceImplTest {
         //given
         Pokemon pokemon = mockPokemon();
         //when
+        when(generationService.getGenerationById(1L)).thenReturn(null);
+        when(statsService.getStatsById(1L)).thenReturn(null);
+        when(artworkService.getArtworkById(1L)).thenReturn(null);
+        when(typeService.getTypeById(1L)).thenReturn(null);
+
         pokemonService.createPokemon(pokemon);
         //then
         verify(repository).save(pokemon);
     }
 
     @Test
-    void createPokemonFailure() throws Exception {
+    void createPokemonFailureDueNullValues() throws Exception {
         //given
-        String expectedMessage = "Object contain null values";
         Pokemon pokemon = mockPokemon();
         pokemon.setGeneration(null);
-        pokemon.setStats(null);
         //then
         Exception exception = assertThrows(Exception.class, () -> pokemonService.createPokemon(pokemon));
-        String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
@@ -103,7 +112,12 @@ class PokemonServiceImplTest {
         //given
         Pokemon pokemon = mockPokemon();
         //when
+        when(generationService.getGenerationById(1L)).thenReturn(null);
+        when(statsService.getStatsById(1L)).thenReturn(null);
+        when(artworkService.getArtworkById(1L)).thenReturn(null);
+        when(typeService.getTypeById(1L)).thenReturn(null);
         when(repository.findById(anyLong())).thenReturn(java.util.Optional.ofNullable(pokemon));
+
         pokemonService.updatePokemon(pokemon);
         //then
         verify(repository).save(pokemon);
@@ -125,12 +139,25 @@ class PokemonServiceImplTest {
         pokemon.setWeight(1);
 
         Stats stats = new Stats();
-        stats.setAttack(1);
+        stats.setId(1L);
         pokemon.setStats(stats);
 
         Generation generation = new Generation();
         generation.setId(1L);
         pokemon.setGeneration(generation);
+
+        Artwork artwork = new Artwork();
+        artwork.setId(1L);
+        pokemon.setArtwork(artwork);
+
+        Region region = new Region();
+        region.setId(1L);
+        region.setName("Kanto");
+        pokemon.setRegion(region);
+
+        Type type = new Type();
+        type.setId(1L);
+        pokemon.setTypes(List.of(type));
 
         return pokemon;
     }

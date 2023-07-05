@@ -3,15 +3,12 @@ package com.gcruz.pokeapi.service.impl;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.ArtworkRepository;
 import com.gcruz.pokeapi.repository.model.Artwork;
-import com.gcruz.pokeapi.repository.model.Pokemon;
 import com.gcruz.pokeapi.service.ArtworkService;
-import com.gcruz.pokeapi.service.PokemonService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -20,7 +17,6 @@ import java.util.Optional;
 public class ArtworkServiceImpl implements ArtworkService {
 
     private ArtworkRepository repository;
-    private PokemonService pokemonService;
 
     @Override
     public Artwork createArtwork(Artwork artwork) throws Exception {
