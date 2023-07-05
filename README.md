@@ -2,11 +2,11 @@
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white) ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white) ![PostgreSQL Badge](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=fff&style=for-the-badge) ![Docker Badge](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff&style=for-the-badge)
 <img src="https://img.pokemondb.net/sprites/home/normal/pikachu-original-cap.png" align="right" /> ![Gradle Badge](https://img.shields.io/badge/Gradle-02303A?logo=gradle&logoColor=fff&style=for-the-badge) 
 
-This API has been created to create and fetch Pokémon data, like a Pokedéx. 
+This API has been developed to facilitate the creation and retrieval of Pokémon data, functioning similar to a Pokédex.
 
-With this API you can perform crud operations on Pokémons, Generations, Regions, Stats, Artworks, Regions and Pokémon's types.
+Using this API, you can perform CRUD operations on various aspects of Pokémon, including Pokémon themselves, Generations, Regions, Stats, Artworks, and Pokémon Types.
 
-It has been created for practice purposes and still work in progress. :) 
+Please note that this API is still a work in progress and has been designed for practice purposes. Your feedback is greatly appreciated! :)
 
 ## Requirements
 For building and running the application you need:
