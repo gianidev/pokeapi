@@ -16,5 +16,5 @@ public interface PokemonService {
 
     Pokemon updatePokemon(Pokemon pokemon) throws Exception;
 
-    void deletePokemon(long id) throws Exception;
+    void deletePokemon(long id) throws NotFoundException;
 }

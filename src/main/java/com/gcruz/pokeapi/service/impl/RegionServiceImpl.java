@@ -6,6 +6,7 @@ import com.gcruz.pokeapi.repository.model.Region;
 import com.gcruz.pokeapi.service.RegionService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,12 +61,12 @@ public class RegionServiceImpl implements RegionService {
     }
 
     @Override
-    public void deleteRegion(long id) throws Exception {
+    public void deleteRegion(long id) throws NotFoundException {
         try {
             log.info(String.format("Deleting Region with id %s.", id));
             repository.deleteById(id);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
+        } catch (EmptyResultDataAccessException e) {
+            throw new NotFoundException(String.format("Can't delete, Region with Id %s does not exist", id));
         }
     }
 

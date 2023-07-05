@@ -6,6 +6,7 @@ import com.gcruz.pokeapi.repository.model.Artwork;
 import com.gcruz.pokeapi.service.ArtworkService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,8 +61,12 @@ public class ArtworkServiceImpl implements ArtworkService {
     }
 
     @Override
-    public void deleteArtwork(long id) {
-        log.info(String.format("Deleting Artwork with Id %s.", id));
-        repository.deleteById(id);
+    public void deleteArtwork(long id) throws NotFoundException {
+        try {
+            log.info(String.format("Deleting Artwork with Id %s.", id));
+            repository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new NotFoundException(String.format("Can't delete, Artwork with Id %s does not exist", id));
+        }
     }
 }

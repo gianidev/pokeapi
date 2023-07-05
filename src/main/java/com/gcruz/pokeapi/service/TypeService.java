@@ -14,5 +14,5 @@ public interface TypeService {
 
     Type updateType(Type stats) throws Exception;
 
-    void deleteType(long id) throws Exception;
+    void deleteType(long id) throws NotFoundException;
 }

@@ -1,11 +1,12 @@
 package com.gcruz.pokeapi.service.impl;
 
-import com.gcruz.pokeapi.repository.model.Generation;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.GenerationRepository;
+import com.gcruz.pokeapi.repository.model.Generation;
 import com.gcruz.pokeapi.service.GenerationService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.Optional;
 public class GenerationServiceImpl implements GenerationService {
 
     private final GenerationRepository repository;
-    
+
     @Override
     public Generation createGeneration(Generation generation) throws Exception {
         try {
@@ -59,12 +60,12 @@ public class GenerationServiceImpl implements GenerationService {
     }
 
     @Override
-    public void deleteGeneration(long id) throws Exception {
+    public void deleteGeneration(long id) throws NotFoundException {
         try {
-            log.info(String.format("Deleting generation with id %s.", id));
+            log.info(String.format("Deleting Generation with id %s.", id));
             repository.deleteById(id);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
+        } catch (EmptyResultDataAccessException e) {
+            throw new NotFoundException(String.format("Can't delete, Generation with Id %s does not exist", id));
         }
     }
 

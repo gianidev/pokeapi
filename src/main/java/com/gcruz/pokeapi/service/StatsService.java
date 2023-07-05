@@ -14,5 +14,5 @@ public interface StatsService {
 
     Stats updateStats(Stats stats) throws Exception;
 
-    void deleteStats(long id) throws Exception;
+    void deleteStats(long id) throws NotFoundException;
 }

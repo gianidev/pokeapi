@@ -1,7 +1,7 @@
 package com.gcruz.pokeapi.service;
 
-import com.gcruz.pokeapi.repository.model.Generation;
 import com.gcruz.pokeapi.exception.NotFoundException;
+import com.gcruz.pokeapi.repository.model.Generation;
 
 import java.util.List;
 
@@ -14,5 +14,5 @@ public interface GenerationService {
 
     Generation updateGeneration(Generation generation) throws Exception;
 
-    void deleteGeneration(long id) throws Exception;
+    void deleteGeneration(long id) throws NotFoundException;
 }

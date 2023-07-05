@@ -8,6 +8,7 @@ import com.gcruz.pokeapi.service.*;
 import com.google.common.base.Preconditions;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -79,13 +80,13 @@ public class PokemonServiceImpl implements PokemonService {
     }
 
     @Override
-    public void deletePokemon(long id) throws Exception {
+    public void deletePokemon(long id) throws NotFoundException {
         try {
             log.info(String.format("Deleting Pokemon with id %s.", id));
 
             repository.deleteById(id);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
+        } catch (EmptyResultDataAccessException e) {
+            throw new NotFoundException(String.format("Can't delete, Pokemon with Id %s does not exist", id));
         }
     }
 

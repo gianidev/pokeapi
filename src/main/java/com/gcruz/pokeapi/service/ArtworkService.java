@@ -14,5 +14,5 @@ public interface ArtworkService {
 
     Artwork updateArtwork(Artwork artwork) throws Exception;
 
-    void deleteArtwork(long id) throws Exception;
+    void deleteArtwork(long id) throws NotFoundException;
 }

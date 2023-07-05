@@ -1,11 +1,12 @@
 package com.gcruz.pokeapi.service.impl;
 
-import com.gcruz.pokeapi.repository.model.Type;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.TypeRepository;
+import com.gcruz.pokeapi.repository.model.Type;
 import com.gcruz.pokeapi.service.TypeService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,12 +61,12 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
-    public void deleteType(long id) throws Exception {
+    public void deleteType(long id) throws NotFoundException {
         try {
             log.info(String.format("Deleting Type with id %s.", id));
             repository.deleteById(id);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
+        } catch (EmptyResultDataAccessException e) {
+            throw new NotFoundException(String.format("Can't delete, Type with Id %s does not exist", id));
         }
     }
 }
