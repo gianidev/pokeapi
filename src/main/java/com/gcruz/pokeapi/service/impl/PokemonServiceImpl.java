@@ -89,6 +89,7 @@ public class PokemonServiceImpl implements PokemonService {
         }
     }
 
+    //TODO: Add unique name validation
     private void checkPokemonRequest(Pokemon pokemon) {
         Preconditions.checkArgument(StringUtils.hasText(pokemon.getName()), customPokemonCheckMessage("name"));
         Preconditions.checkArgument(Objects.nonNull(pokemon.getRegion()), customPokemonCheckMessage("region"));
@@ -115,4 +116,5 @@ public class PokemonServiceImpl implements PokemonService {
             throw new IllegalArgumentException("Cannot create pokemon: " + e.getMessage());
         }
     }
+
 }
