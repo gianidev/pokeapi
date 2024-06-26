@@ -1,7 +1,7 @@
 package com.gcruz.pokeapi.service;
 
 import com.gcruz.pokeapi.exception.NotFoundException;
-import com.gcruz.pokeapi.repository.model.Artwork;
+import com.gcruz.pokeapi.model.Artwork;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package com.gcruz.pokeapi.controller;
 
 import com.gcruz.pokeapi.dto.ArtworkDTO;
 import com.gcruz.pokeapi.exception.NotFoundException;
-import com.gcruz.pokeapi.repository.model.Artwork;
+import com.gcruz.pokeapi.model.Artwork;
 import com.gcruz.pokeapi.service.ArtworkService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;

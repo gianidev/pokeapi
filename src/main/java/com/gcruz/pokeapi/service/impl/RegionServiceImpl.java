@@ -2,7 +2,7 @@ package com.gcruz.pokeapi.service.impl;
 
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.RegionRepository;
-import com.gcruz.pokeapi.repository.model.Region;
+import com.gcruz.pokeapi.model.Region;
 import com.gcruz.pokeapi.service.RegionService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

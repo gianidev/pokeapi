@@ -2,8 +2,8 @@ package com.gcruz.pokeapi.service.impl;
 
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.PokemonRepository;
-import com.gcruz.pokeapi.repository.model.Pokemon;
-import com.gcruz.pokeapi.repository.model.Type;
+import com.gcruz.pokeapi.model.Pokemon;
+import com.gcruz.pokeapi.model.Type;
 import com.gcruz.pokeapi.service.*;
 import com.google.common.base.Preconditions;
 import lombok.AllArgsConstructor;

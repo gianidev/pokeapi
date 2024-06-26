@@ -1,8 +1,8 @@
 package com.gcruz.pokeapi.repository;
 
-import com.gcruz.pokeapi.repository.model.Generation;
-import com.gcruz.pokeapi.repository.model.Pokemon;
-import com.gcruz.pokeapi.repository.model.Stats;
+import com.gcruz.pokeapi.model.Generation;
+import com.gcruz.pokeapi.model.Pokemon;
+import com.gcruz.pokeapi.model.Stats;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

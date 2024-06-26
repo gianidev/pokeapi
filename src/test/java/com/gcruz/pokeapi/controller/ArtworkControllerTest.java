@@ -3,7 +3,7 @@ package com.gcruz.pokeapi.controller;
 import com.gcruz.pokeapi.dto.ArtworkDTO;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.ArtworkRepository;
-import com.gcruz.pokeapi.repository.model.Artwork;
+import com.gcruz.pokeapi.model.Artwork;
 import com.gcruz.pokeapi.service.ArtworkService;
 import com.gcruz.pokeapi.service.impl.ArtworkServiceImpl;
 import org.junit.jupiter.api.BeforeEach;

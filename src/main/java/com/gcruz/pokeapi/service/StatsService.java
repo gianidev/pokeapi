@@ -1,6 +1,6 @@
 package com.gcruz.pokeapi.service;
 
-import com.gcruz.pokeapi.repository.model.Stats;
+import com.gcruz.pokeapi.model.Stats;
 import com.gcruz.pokeapi.exception.NotFoundException;
 
 import java.util.List;

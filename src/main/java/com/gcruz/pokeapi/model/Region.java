@@ -1,4 +1,4 @@
-package com.gcruz.pokeapi.repository.model;
+package com.gcruz.pokeapi.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

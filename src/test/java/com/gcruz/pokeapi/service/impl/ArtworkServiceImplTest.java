@@ -1,7 +1,7 @@
 package com.gcruz.pokeapi.service.impl;
 
 import com.gcruz.pokeapi.repository.ArtworkRepository;
-import com.gcruz.pokeapi.repository.model.Artwork;
+import com.gcruz.pokeapi.model.Artwork;
 import com.gcruz.pokeapi.service.ArtworkService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

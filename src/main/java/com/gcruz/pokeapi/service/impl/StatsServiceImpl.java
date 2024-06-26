@@ -2,7 +2,7 @@ package com.gcruz.pokeapi.service.impl;
 
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.StatsRepository;
-import com.gcruz.pokeapi.repository.model.Stats;
+import com.gcruz.pokeapi.model.Stats;
 import com.gcruz.pokeapi.service.StatsService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

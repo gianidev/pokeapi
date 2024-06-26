@@ -2,8 +2,7 @@ package com.gcruz.pokeapi.controller;
 
 import com.gcruz.pokeapi.dto.StatsDTO;
 import com.gcruz.pokeapi.exception.NotFoundException;
-import com.gcruz.pokeapi.repository.model.Stats;
-import com.gcruz.pokeapi.repository.model.Stats;
+import com.gcruz.pokeapi.model.Stats;
 import com.gcruz.pokeapi.service.StatsService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;

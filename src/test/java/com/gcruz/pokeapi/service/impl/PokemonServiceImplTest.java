@@ -1,6 +1,12 @@
 package com.gcruz.pokeapi.service.impl;
 
 import com.gcruz.pokeapi.exception.NotFoundException;
+import com.gcruz.pokeapi.model.Artwork;
+import com.gcruz.pokeapi.model.Generation;
+import com.gcruz.pokeapi.model.Pokemon;
+import com.gcruz.pokeapi.model.Region;
+import com.gcruz.pokeapi.model.Stats;
+import com.gcruz.pokeapi.model.Type;
 import com.gcruz.pokeapi.repository.PokemonRepository;
 import com.gcruz.pokeapi.repository.model.*;
 import com.gcruz.pokeapi.service.*;

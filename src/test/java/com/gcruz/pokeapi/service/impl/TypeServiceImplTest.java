@@ -1,6 +1,6 @@
 package com.gcruz.pokeapi.service.impl;
 
-import com.gcruz.pokeapi.repository.model.Type;
+import com.gcruz.pokeapi.model.Type;
 import com.gcruz.pokeapi.repository.TypeRepository;
 import com.gcruz.pokeapi.service.TypeService;
 import org.junit.jupiter.api.BeforeEach;

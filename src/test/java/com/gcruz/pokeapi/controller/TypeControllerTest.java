@@ -3,7 +3,7 @@ package com.gcruz.pokeapi.controller;
 import com.gcruz.pokeapi.dto.TypeDTO;
 import com.gcruz.pokeapi.exception.NotFoundException;
 import com.gcruz.pokeapi.repository.TypeRepository;
-import com.gcruz.pokeapi.repository.model.Type;
+import com.gcruz.pokeapi.model.Type;
 import com.gcruz.pokeapi.service.TypeService;
 import com.gcruz.pokeapi.service.impl.TypeServiceImpl;
 import org.junit.jupiter.api.BeforeEach;

@@ -2,7 +2,7 @@ package com.gcruz.pokeapi.controller;
 
 import com.gcruz.pokeapi.dto.GenerationDTO;
 import com.gcruz.pokeapi.exception.NotFoundException;
-import com.gcruz.pokeapi.repository.model.Generation;
+import com.gcruz.pokeapi.model.Generation;
 import com.gcruz.pokeapi.service.GenerationService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;

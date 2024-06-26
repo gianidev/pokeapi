@@ -2,7 +2,7 @@ package com.gcruz.pokeapi.controller;
 
 import com.gcruz.pokeapi.dto.PokemonDTO;
 import com.gcruz.pokeapi.exception.NotFoundException;
-import com.gcruz.pokeapi.repository.model.Pokemon;
+import com.gcruz.pokeapi.model.Pokemon;
 import com.gcruz.pokeapi.service.PokemonService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
